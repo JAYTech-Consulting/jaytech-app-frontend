@@ -1,0 +1,20 @@
+/* Optional custom styles; Tailwind handles most styling */
+:host {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Example: add icon spacing if needed */
+:host ::ng-deep svg {
+    pointer-events: none;
+    width: 1rem; /* w-4 */
+    height: 1rem; /* h-4 */
+    flex-shrink: 0;
+}
+/* Optional: additional styles for hover effects or SVG handling */
+button svg {
+    pointer-events: none;
+    width: 1rem;
+    height: 1rem;
+}

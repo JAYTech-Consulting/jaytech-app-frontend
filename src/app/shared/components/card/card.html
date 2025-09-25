@@ -1,0 +1,46 @@
+<div
+    class="group interactive-card border-0 shadow-card bg-card/50 backdrop-blur-sm overflow-hidden"
+>
+    <!-- Image -->
+    <div class="relative h-48 overflow-hidden">
+        <img
+            [src]="image"
+            [alt]="title"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
+        <div class="absolute top-4 right-4">
+            <div class="p-2 bg-background/90 backdrop-blur-sm rounded-lg shadow-sm">
+                <i [class]="icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6 space-y-4">
+        <h3
+            class="text-xl font-semibold text-foreground group-hover:text-primary transition-colors"
+        >
+            {{ title }}
+        </h3>
+        <p class="text-muted-foreground leading-relaxed">{{ description }}</p>
+
+        <!-- Features -->
+        <ul class="space-y-2">
+            @for (feature of features; track feature) {
+                <li class="flex items-center gap-2 text-sm text-muted-foreground">
+                    <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                    {{ feature }}
+                </li>
+            }
+        </ul>
+
+        <!-- Action -->
+        <div class="pt-2">
+            <button class="text-primary hover:text-primary flex items-center gap-1">
+                Learn more
+                <i class="arrow-right-icon"></i>
+            </button>
+        </div>
+    </div>
+</div>
