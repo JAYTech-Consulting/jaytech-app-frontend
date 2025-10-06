@@ -1,0 +1,13 @@
+<input
+    #nativeInput
+    [id]="id"
+    [name]="name"
+    [type]="type"
+    [attr.placeholder]="placeholder"
+    [attr.autocomplete]="autocomplete"
+    [disabled]="disabled"
+    [class]="computeClass()"
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+/>

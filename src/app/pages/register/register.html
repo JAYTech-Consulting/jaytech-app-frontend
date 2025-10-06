@@ -1,0 +1,334 @@
+<div class="min-h-screen    flex items-center justify-center p-4 relative overflow-hidden">
+
+
+    <div class="w-full  max-w-md relative z-10">
+        <app-card class="shadow-elegant animate-scale-in bg-card/80 backdrop-blur-lg border border-border/50">
+            <app-card-header class="text-center space-y-4">
+                <div class="mx-auto w-16 h-16 bg-gradient-secondary rounded-2xl flex items-center justify-center">
+                    <svg class="w-8 h-8 text-secondary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path>
+                        <path d="M4 20a8 8 0 0 1 16 0"></path>
+                    </svg>
+                </div>
+
+                <div>
+                    <app-card-title class="text-2xl font-bold">
+                        {{ currentStep === 1 ? 'Create Account' : 'Set Your Password' }}
+                    </app-card-title><br />
+                    <app-card-description class="text-base">
+                        {{ currentStep === 1 ? 'Join thousands of satisfied users today' : 'Create a secure password for your account' }}
+                    </app-card-description>
+                </div>
+
+                <!-- Step Indicator -->
+                <div class="flex items-center justify-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div [ngClass]="currentStep >= 1 ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'"
+                             class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors">
+                            1
+                        </div>
+                        <span [ngClass]="currentStep >= 1 ? 'text-foreground' : 'text-muted-foreground'" class="text-sm">Basic Info</span>
+                    </div>
+
+                    <div [ngClass]="currentStep >= 2 ? 'bg-primary' : 'bg-muted'" class="w-8 h-px"></div>
+
+                    <div class="flex items-center space-x-2">
+                        <div [ngClass]="currentStep >= 2 ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'"
+                             class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors">
+                            2
+                        </div>
+                        <span [ngClass]="currentStep >= 2 ? 'text-foreground' : 'text-muted-foreground'" class="text-sm">Password</span>
+                    </div>
+                </div>
+            </app-card-header>
+
+            <app-card-content class="space-y-6">
+                @if (currentStep === 1) {
+                    <br />
+                    <!-- Step 1: Social + Basic Info -->
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-3">
+                            <app-button
+                                variant="outline"
+                                size="lg"
+                                (click)="handleSocialLogin('Google')"
+                                class="w-full hover:bg-muted/50 transition-all duration-300 hover:scale-105"
+                            >
+                                <svg
+                                    class="w-5 h-5 mr-2"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M21.35 11.1h-9.17v2.92h5.25c-.23 1.27-.93 2.34-1.98 3.07l3.2 2.49c1.87-1.73 2.95-4.27 2.95-7.26 0-.53-.05-1.05-.15-1.54zM12.18 21c2.68 0 4.93-.89 6.57-2.42l-3.2-2.49c-.9.6-2.05.95-3.37.95-2.59 0-4.79-1.74-5.57-4.08H3.24v2.56A8.82 8.82 0 0 0 12.18 21zm-5.57-7.05c-.2-.6-.31-1.23-.31-1.89 0-.66.11-1.29.31-1.89V7.61H3.24A8.82 8.82 0 0 0 2 12c0 1.39.33 2.7.92 3.89l3.69-2.94zM12.18 7.18c1.45 0 2.75.5 3.78 1.48l2.83-2.83A8.82 8.82 0 0 0 12.18 3 8.82 8.82 0 0 0 3.24 7.61l3.69 2.94c.78-2.34 2.98-4.08 5.57-4.08z"
+                                    />
+                                </svg>
+                                Google
+                            </app-button>
+                            <app-button
+                                variant="outline"
+                                size="lg"
+                                (click)="handleSocialLogin('Apple')"
+                                class="hover:bg-muted/50 transition-all duration-300 hover:scale-105"
+                            >
+                                <svg
+                                    class="w-5 h-5 mr-2"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M16.36 1.43c0 1.14-.46 2.24-1.27 3.05-.79.82-2.05 1.48-3.2 1.39-.14-1.09.42-2.25 1.2-3.04.8-.84 2.18-1.44 3.27-1.4zm5.16 16.03c-.35.8-.77 1.56-1.27 2.29-.67.98-1.21 1.66-1.63 2.14-.65.76-1.34 1.53-2.21 1.55-.83.02-1.1-.5-2.28-.5s-1.47.48-2.31.52c-.95.04-1.68-.82-2.34-1.58-1.27-1.42-2.26-3.62-2.26-5.76 0-1.7.56-3.05 1.65-4 .82-.72 1.87-1.14 2.94-1.16.9-.02 1.75.55 2.28.55.51 0 1.55-.68 2.62-.58.45.02 1.72.18 2.53 1.42-.06.04-1.51.87-1.49 2.62.02 2.11 1.92 2.81 1.96 2.83z"
+                                    />
+                                </svg>
+                                Apple
+                            </app-button>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <app-button
+                                variant="outline"
+                                size="lg"
+                                (click)="handleSocialLogin('GitHub')"
+                                class="w-full hover:bg-muted/50 transition-all duration-300 hover:scale-105"
+                            >
+                                <svg
+                                    class="w-5 h-5 mr-2"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M12 0C5.37 0 0 5.4 0 12.07c0 5.34 3.44 9.86 8.21 11.47.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.63-4.04-1.63-.55-1.42-1.34-1.8-1.34-1.8-1.09-.76.08-.75.08-.75 1.2.09 1.83 1.24 1.83 1.24 1.07 1.85 2.81 1.31 3.5 1 .11-.79.42-1.31.76-1.61-2.67-.31-5.47-1.36-5.47-6.05 0-1.34.47-2.43 1.24-3.29-.13-.31-.54-1.56.12-3.25 0 0 1.01-.33 3.3 1.25a11.36 11.36 0 0 1 6 0c2.28-1.58 3.3-1.25 3.3-1.25.66 1.69.25 2.94.12 3.25.77.86 1.24 1.95 1.24 3.29 0 4.7-2.81 5.73-5.49 6.04.43.37.81 1.1.81 2.23v3.3c0 .32.22.7.82.58A12.04 12.04 0 0 0 24 12.07C24 5.4 18.63 0 12 0z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                                GitHub
+                            </app-button>
+
+                            <app-button
+                                variant="outline"
+                                size="lg"
+                                (click)="handleSocialLogin('Microsoft')"
+                                class="hover:bg-muted/50 transition-all duration-300 hover:scale-105"
+                            >
+                                <svg
+                                    class="w-5 h-5 mr-2"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <!-- Top left -->
+                                    <path
+                                        d="M2 2h9v9H2V2zM13 2h9v9h-9V2zM2 13h9v9H2v-9zM13 13h9v9h-9v-9z"
+                                    />
+                                </svg>
+                                Microsoft
+                            </app-button>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="relative">
+                        <app-separator class="my-6"></app-separator>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="bg-card px-4 text-sm text-muted-foreground">or sign up with email</span>
+                        </div>
+                    </div>
+
+                    <!-- Basic Info form (native inputs with ngModel) -->
+                    <form (submit)="handleSubmit($event)" class="space-y-4" novalidate>
+                        <div class="space-y-2">
+                            <app-label for="name">Full Name</app-label>
+                            <div class="relative">
+                                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path>
+                                    <path d="M4 20a8 8 0 0 1 16 0"></path>
+                                </svg>
+                                <input id="name" name="name" type="text"
+                                       class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base md:text-sm pl-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                       placeholder="Enter your full name"
+                                       [(ngModel)]="formData.name" required />
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <app-label for="email">Email Address</app-label>
+                            <div class="relative">
+                                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                    <path d="M22 6l-10 7L2 6"></path>
+                                </svg>
+                                <input id="email" name="email" type="email"
+                                       class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base md:text-sm pl-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                       placeholder="Enter your email"
+                                       [(ngModel)]="formData.email" required />
+                            </div>
+                        </div>
+
+                        <app-button type="submit" size="lg"
+                                    class="w-full bg-gradient-secondary hover:opacity-90 transition-all duration-300 hover:scale-105 shadow-elegant">
+                            Continue
+                            <svg class="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                            </svg>
+                        </app-button>
+                    </form>
+                } @else {
+                    <!-- Step 2: Password + checks -->
+                    <form (submit)="handleSubmit($event)" class="space-y-4" novalidate>
+                        <div class="space-y-2">
+                            <app-label for="password">Password</app-label>
+                            <div class="relative">
+                                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="4" y="11" width="16" height="10" rx="2"></rect>
+                                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+                                </svg>
+
+                                <input id="password" name="password"
+                                       [type]="showPassword ? 'text' : 'password'"
+                                       class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base md:text-sm pl-10 pr-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                       placeholder="Create a strong password"  autocomplete="new-password"
+                                       [(ngModel)]="formData.password" required />
+
+                                <app-button type="button" variant="ghost" size="icon"
+                                            class="absolute right-1 top-1/2 transform -translate-y-1/2 h-8 w-8"
+                                            (click)="showPassword = !showPassword"
+                                            [attr.aria-pressed]="showPassword">
+                                    @if (showPassword) {
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.77 21.77 0 0 1 5.11-6.36"></path>
+                                            <path d="M1 1l22 22"></path>
+                                        </svg>
+                                    } @else {
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    }
+                                </app-button>
+                            </div>
+
+                            @if (formData.password) {
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-muted-foreground">Password strength:</span>
+                                        <span class="font-medium"
+                                              [ngClass]="passwordStrength > 75 ? 'text-primary' : passwordStrength > 50 ? 'text-secondary' : passwordStrength > 25 ? 'text-accent' : 'text-destructive'">
+                      {{ getStrengthText(passwordStrength) }}
+                    </span>
+                                    </div>
+
+                                    <app-progress [value]="passwordStrength" class="h-2" [ngClass]="getStrengthColorClass(passwordStrength)"></app-progress>
+
+                                    <div class="space-y-1">
+                                        @for (req of passwordRequirements;track req) {
+                                            <div class="flex items-center space-x-2 text-xs">
+                                                @if (req.met) {
+                                                    <svg class="w-3 h-3 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                        <path d="M20 6L9 17l-5-5"></path>
+                                                    </svg>
+                                                } @else {
+                                                    <svg class="w-3 h-3 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                        <path d="M6 6l12 12"></path>
+                                                        <path d="M6 18L18 6"></path>
+                                                    </svg>
+                                                }
+                                                <span [ngClass]="req.met ? 'text-primary' : 'text-muted-foreground'">{{ req.text }}</span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                        <div class="space-y-2">
+                            <app-label for="confirmPassword">Confirm Password</app-label>
+                            <div class="relative">
+                                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="4" y="11" width="16" height="10" rx="2"></rect>
+                                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+                                </svg>
+
+                                <input id="confirmPassword" name="confirmPassword"
+                                       [type]="showConfirmPassword ? 'text' : 'password'"
+                                       class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base md:text-sm pl-10 pr-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                       placeholder="Confirm your password"
+                                       [(ngModel)]="formData.confirmPassword" required />
+
+                                <app-button type="button" variant="ghost" size="icon"
+                                            class="absolute right-1 top-1/2 transform -translate-y-1/2 h-8 w-8"
+                                            (click)="showConfirmPassword = !showConfirmPassword"
+                                            [attr.aria-pressed]="showConfirmPassword">
+                                    @if (showConfirmPassword) {
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.77 21.77 0 0 1 5.11-6.36"></path>
+                                            <path d="M1 1l22 22"></path>
+                                        </svg>
+                                    } @else {
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    }
+                                </app-button>
+                            </div>
+
+                            @if (formData.confirmPassword && formData.password !== formData.confirmPassword) {
+                                <div class="text-xs text-destructive">Passwords do not match</div>
+                            }
+                        </div>
+
+                        <!-- Checkboxes -->
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-2">
+                                <input id="terms" name="terms" type="checkbox" class="h-4 w-4 mt-1" [(ngModel)]="formData.agreeToTerms" />
+                                <app-label for="terms" class="text-sm leading-5">
+                                    I agree to the <button type="button" class="text-primary hover:underline">Terms of Service</button> and <button type="button" class="text-primary hover:underline">Privacy Policy</button>
+                                </app-label>
+                            </div>
+
+                            <div class="flex items-center space-x-2">
+                                <input id="newsletter" name="newsletter" type="checkbox" class="h-4 w-4" [(ngModel)]="formData.newsletter" />
+                                <app-label for="newsletter" class="text-sm">Send me updates and marketing emails</app-label>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="flex space-x-3">
+                            <app-button type="button" variant="outline" size="lg" (click)="goToPreviousStep()" class="flex-1">Back</app-button>
+
+                            <app-button type="submit" size="lg"
+                                        [attr.disabled]="isLoading || !formData.agreeToTerms ? true : null"
+                                        class="flex-1 bg-gradient-secondary hover:opacity-90 transition-all duration-300 hover:scale-105 shadow-elegant">
+                                @if (isLoading) {
+                                    <div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+                                    Creating account...
+                                } @else {
+                                    Create Account
+                                    <svg class="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                }
+                            </app-button>
+                        </div>
+                    </form>
+                }
+
+                <!-- Sign In Link -->
+                <div class="text-center text-sm">
+                    <span class="text-muted-foreground">Already have an account? </span>
+                    <a routerLink="/login" class="text-primary hover:text-primary/80 font-medium hover:underline transition-colors">Sign in instead</a>
+                </div>
+            </app-card-content>
+        </app-card>
+    </div>
+</div>

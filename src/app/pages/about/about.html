@@ -1,1 +1,116 @@
-<p>about works!</p>
+<section class="relative min-h-[35vh] flex items-center justify-center overflow-hidden">
+    <!-- Background Gradient -->
+    <div class="absolute inset-0 bg-gradient-hero opacity-10"></div>
+
+    <!-- Floating Elements -->
+    <div
+        class="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl animate-float"
+    ></div>
+    <div
+        class="absolute bottom-20 right-10 w-32 h-32 bg-secondary/20 rounded-full blur-xl animate-float"
+        style="animation-delay: 1s"
+    ></div>
+    <div
+        class="absolute top-40 right-20 w-16 h-16 bg-accent/20 rounded-full blur-xl animate-float"
+        style="animation-delay: 2s"
+    ></div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-4xl mx-auto">
+            <!-- Main Heading -->
+            <h1
+                class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-slide-up"
+            >
+                About <span class="text-gradient">JAY-TECH</span> Consulting
+            </h1>
+
+            <!-- Subtitle -->
+            <p
+                class="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in"
+                style="animation-delay: 0.2s"
+            >
+                Your dedicated partner in IT recruitment and talent acquisition
+            </p>
+        </div>
+    </div>
+
+    <!-- Bottom Wave -->
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 320" class="w-full h-20 fill-muted/20">
+            <path
+                d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,128C960,117,1056,75,1152,74.7C1248,75,1344,117,1392,138.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            ></path>
+        </svg>
+    </div>
+</section>
+
+<section class="py-20 bg-gradient-subtle">
+    <div class="container mx-auto px-4">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Image -->
+            <div class="relative">
+                <div
+                    class="absolute inset-0 bg-gradient-primary rounded-lg transform rotate-3 opacity-20"
+                ></div>
+                <img
+                    src="https://images.unsplash.com/photo-1518893494013-481c1d8ed3fd"
+                    alt="Modern workspace environment"
+                    class="relative rounded-lg shadow-elegant w-full h-auto hover-scale"
+                />
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-6">
+                <div class="space-y-4">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-foreground">
+                        Our <span class="text-gradient">Mission</span>
+                    </h2>
+                    <p class="text-lg text-muted-foreground leading-relaxed">
+                        At JAY-Tech CONSULTING, we bridge the gap between talented IT professionals
+                        and innovative companies. Our mission is to create meaningful connections
+                        that drive technological advancement and career growth.
+                    </p>
+
+                    <p class="text-lg text-muted-foreground leading-relaxed">
+                        Founded by industry veterans with decades of combined experience in both IT
+                        and recruitment, we understand the unique challenges faced by companies
+                        seeking specialized talent and professionals looking for the right
+                        opportunities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-10 bg-background">
+    <div class="container mx-auto px-4">
+        <div class="grid gap-12 items-center">
+            <p
+                class="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in"
+                style="animation-delay: 0.2s"
+            >
+                We're committed to a personalized approach that goes beyond keyword matching to
+                ensure cultural and technical fit, resulting in successful long-term placements.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-gradient-subtle">
+    <div class="container mx-auto px-4">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+                Our
+                <span class="text-gradient-accent">Success</span> Stories
+            </h2>
+        </div>
+        <div class="grid md:grid-cols-3 lg:grid-cols-3 gap-8 mb-12">
+            @for (card of cards; track card) {
+                <app-image-card-section [card]="card"></app-image-card-section>
+            }
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

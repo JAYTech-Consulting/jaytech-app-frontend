@@ -1,0 +1,7 @@
+.app-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 1.5rem; /* p-6 equivalent */
+    padding-bottom: 0.75rem;
+}

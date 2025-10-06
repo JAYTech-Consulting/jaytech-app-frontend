@@ -22,23 +22,11 @@ interface SocialLink {
 export class Footer {
     currentYear: number = new Date().getFullYear();
     footerLinks: Record<string, FooterLink[]> = {
-        Product: [
-            { name: 'Features', href: '#features' },
-            { name: 'Pricing', href: '#pricing' },
-            { name: 'Documentation', href: '#docs' },
-            { name: 'API Reference', href: '#api' },
-        ],
         Company: [
             { name: 'About Us', href: '#about' },
             { name: 'Careers', href: '#careers' },
             { name: 'Blog', href: '#blog' },
             { name: 'Press Kit', href: '#press' },
-        ],
-        Resources: [
-            { name: 'Community', href: '#community' },
-            { name: 'Help Center', href: '#help' },
-            { name: 'Partners', href: '#partners' },
-            { name: 'Status', href: '#status' },
         ],
         Legal: [
             { name: 'Privacy Policy', href: '#privacy' },

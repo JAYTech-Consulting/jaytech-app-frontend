@@ -1,0 +1,12 @@
+.app-label {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600;    /* font-medium */
+    line-height: 1;
+    color: #0f172a;
+    display: inline-block;
+}
+
+.app-label.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}

@@ -1,0 +1,169 @@
+<section class="relative min-h-[65vh] flex items-center justify-center overflow-hidden">
+    <!-- Background Gradient -->
+    <div class="absolute inset-0 bg-gradient-hero opacity-10"></div>
+
+    <!-- Floating Elements -->
+    <div
+        class="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl animate-float"
+    ></div>
+    <div
+        class="absolute bottom-20 right-10 w-32 h-32 bg-secondary/20 rounded-full blur-xl animate-float"
+        style="animation-delay: 1s"
+    ></div>
+    <div
+        class="absolute top-40 right-20 w-16 h-16 bg-accent/20 rounded-full blur-xl animate-float"
+        style="animation-delay: 2s"
+    ></div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Content -->
+            <div class="space-y-8">
+
+                <h2 class="text-4xl lg:text-5xl font-bold text-foreground">
+                    Contact Us
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-2xl text-muted-foreground leading-relaxed">
+                        Reach out to discuss your IT staffing needs or career opportunities
+                    </p>
+                </div>
+            </div>
+            <!-- Image -->
+            <div class="relative">
+                <div
+                    class="absolute inset-0 bg-gradient-primary rounded-lg transform rotate-3 opacity-20"
+                ></div>
+                <img
+                    src="https://img.freepik.com/free-vector/flat-design-illustration-customer-support_23-2148887720.jpg"
+                    alt="Modern workspace environment"
+                    class="relative rounded-lg shadow-elegant w-70 h-auto hover-scale"
+                />
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Wave -->
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 320" class="w-full h-20 fill-muted/20">
+            <path
+                d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,128C960,117,1056,75,1152,74.7C1248,75,1344,117,1392,138.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            ></path>
+        </svg>
+    </div>
+</section>
+
+<section id="contact" class="py-20 lg:py-32 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-subtle opacity-50"></div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <div class="inline-flex items-center rounded-full border px-4 py-2 text-xs font-semibold text-foreground">Contact</div>
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                Let's Build Something
+                <span class="text-gradient block mt-2">Amazing Together</span>
+            </h2>
+            <p class="text-xl text-muted-foreground leading-relaxed">
+                Ready to transform your digital presence? Get in touch and let's discuss your project.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <!-- Contact Information -->
+            <div class="lg:col-span-1 space-y-6">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Get in Touch</h3>
+                    <div class="space-y-6">
+                        @for (info of contactInfo; track info; let i = $index) {
+                            <div class="flex items-start space-x-4 animate-fade-in" >
+                                <div class="p-3 rounded-xl bg-primary/10">
+                                    <i [class]="'icon-'+info.icon + ' w-6 h-6 text-primary'"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-foreground mb-1">{{ info.title }}</h4>
+                                    <p class="text-foreground font-medium">{{ info.content }}</p>
+                                    <p class="text-muted-foreground text-sm">{{ info.description }}</p>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+                <!-- Features Card -->
+                <div class="bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20 rounded-lg p-6">
+                    <h4 class="text-lg font-bold mb-2">Why Choose Us?</h4>
+                    <p class="text-sm mb-4">We're committed to your success</p>
+                    <div class="space-y-4">
+                        @for (feature of features; track feature) {
+                            <div  class="flex items-center space-x-3">
+                                <i [class]="'icon-'+feature.icon + ' w-5 h-5 text-primary'"></i>
+                                <span class="text-sm font-medium">{{ feature.text }}</span>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="lg:col-span-2">
+                <div class="bg-card shadow-elegant hover:shadow-glow transition-all duration-300 rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-2">Send us a Message</h3>
+                    <p class="text-muted-foreground mb-6">Fill out the form below and we'll get back to you as soon as possible.</p>
+
+                    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block mb-1 font-medium">Full Name *</label>
+                                <input type="text" formControlName="name" placeholder="John Doe" class="w-full rounded-md border px-3 py-2" required />
+                            </div>
+                            <div>
+                                <label class="block mb-1 font-medium">Email Address *</label>
+                                <input type="email" formControlName="email" placeholder="john@company.com" class="w-full rounded-md border px-3 py-2" required />
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block mb-1 font-medium">Company</label>
+                                <input type="text" formControlName="company" placeholder="Your Company Inc." class="w-full rounded-md border px-3 py-2" />
+                            </div>
+                            <div>
+                                <label class="block mb-1 font-medium">Subject *</label>
+                                <select formControlName="subject" class="w-full rounded-md border px-3 py-2">
+                                    @for (sub of subjects; track sub) {
+                                        <option [value]="sub.value">{{ sub.label }}</option>
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block mb-1 font-medium">Message *</label>
+                            <textarea formControlName="message" rows="5" placeholder="Tell us about your project..." class="w-full rounded-md border px-3 py-2"></textarea>
+                        </div>
+
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" formControlName="newsletter" id="newsletter" class="w-4 h-4 rounded" />
+                            <label for="newsletter" class="text-sm text-muted-foreground">Subscribe to our newsletter for updates and tips</label>
+                        </div>
+
+                        <button type="submit" [disabled]="isSubmitting" class="w-full bg-gradient-primary text-white py-3 rounded-lg transition-all duration-300 hover:opacity-90 hover:scale-105 flex items-center justify-center">
+                            <span [@if]="!isSubmitting">Send Message</span>
+                            <span [@if]="isSubmitting" class="flex items-center">
+                <span class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></span>
+                Sending...
+              </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

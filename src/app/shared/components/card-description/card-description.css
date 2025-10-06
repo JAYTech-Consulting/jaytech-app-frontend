@@ -1,0 +1,5 @@
+.app-card-description {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem; /* text-sm */
+    color: #6b7280;      /* muted-foreground */
+}

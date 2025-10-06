@@ -1,0 +1,37 @@
+:host { display: block; }
+
+/* fallback utilities (retain Tailwind-friendly class hooks) */
+.min-h-screen { min-height: 100vh; }
+.bg-gradient-hero { background: linear-gradient(180deg,#F5F7FF 0%, #fff 100%); }
+.bg-card { background: rgba(255,255,255,0.8); }
+.text-muted-foreground { color: #6b7280; }
+.shadow-elegant { box-shadow: 0 10px 30px rgba(2,6,23,0.06); border-radius: 12px; }
+
+/* spinner */
+.animate-spin { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* small fallback utilities */
+.absolute { position: absolute; }
+.relative { position: relative; }
+.rounded-2xl { border-radius: 1rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.w-full { width: 100%; }
+.max-w-md { max-width: 28rem; }
+
+/* button icon pos fallback */
+app-button.password-toggle { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); }
+
+/* Debug helper — forces app-button and its direct children to render inline-flex */
+/*app-button, app-button * {*/
+/*    display: inline-flex !important;*/
+/*}*/
+
+/*!* If you find the inner projected anchor lacks the classes,*/
+/*   force the projected anchor to take full width and center content *!*/
+/*app-button > a {*/
+/*    width: 100%;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    display: inline-flex;*/
+/*}*/

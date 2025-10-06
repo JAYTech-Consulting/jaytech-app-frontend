@@ -1,0 +1,16 @@
+<button
+    type="button"
+    role="checkbox"
+    [id]="id"
+    [disabled]="disabled"
+    [attr.aria-checked]="checked"
+    [class]="classes"
+    (click)="toggle()"
+>
+    @if (checked) {
+        <svg class="h-4 w-4 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <polyline points="20 6 9 17 4 12" />
+        </svg>
+    }
+
+</button>

@@ -1,20 +1,96 @@
-/* Optional custom styles; Tailwind handles most styling */
+/* button.component.css
+   Host receives composed classes via HostBinding('class').
+   The inner <button> is unstyled ("all: unset") and fills the host so
+   visual styling comes from the host element (Tailwind classes or your global CSS).
+*/
+
+/* Make sure the component host acts like an inline-flex button container */
 :host {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem; /* space between icon + text */
+    border-radius: 0.375rem;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+    /* allow dimensions to be controlled via HostBinding class values */
+}
+
+/* Host hover/focus hints (works with classes added by HostBinding) */
+:host(:hover) {
+    transform: translateY(-1px);
+}
+:host(:active) {
+    transform: translateY(0);
+}
+
+/* Make the inner native button neutral and fill the host.
+   This prevents duplicate padding/height coming from both host and inner element. */
+:host > button {
+    all: unset;               /* remove browser default button styles */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    cursor: inherit;
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* When projected element is used (asChild), encourage it to be inline-flex
+   so it inherits layout; consumer anchor should also include 'class' for visuals. */
+:host ::ng-deep a,
+:host ::ng-deep button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Example: add icon spacing if needed */
-:host ::ng-deep svg {
+/* Disabled state: rely on attribute or class; inner button should be non-interactive */
+:host([disabled]),
+:host(.disabled) {
     pointer-events: none;
-    width: 1rem; /* w-4 */
-    height: 1rem; /* h-4 */
-    flex-shrink: 0;
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
 }
-/* Optional: additional styles for hover effects or SVG handling */
-button svg {
-    pointer-events: none;
+
+/* Focus-visible ring fallback if your project does not include Tailwind ring utilities */
+:host(:focus-visible),
+:host > button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(99,102,241,0.08);
+    border-radius: inherit;
+}
+
+/* Size utility fallbacks (if hostClass provides same, these are safety net) */
+:host(.h-10) { height: 2.5rem; }
+:host(.h-9)  { height: 2.25rem; }
+:host(.h-11) { height: 2.75rem; }
+:host(.w-10) { width: 2.5rem; }
+
+/* Ensure icons inside the button don't trigger pointer events */
+:host svg { pointer-events: none; }
+
+/* Small helper to keep inner SVG spacing consistent */
+:host .icon,
+:host svg {
     width: 1rem;
     height: 1rem;
+    flex-shrink: 0;
 }
+
+/* Optional micro-utility: ensure host text doesn't wrap unexpectedly */
+:host { white-space: nowrap; }

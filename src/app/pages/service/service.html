@@ -1,0 +1,112 @@
+<section class="relative min-h-[65vh] flex items-center justify-center overflow-hidden">
+    <!-- Background Gradient -->
+    <div class="absolute inset-0 bg-gradient-hero opacity-10"></div>
+
+    <!-- Floating Elements -->
+    <div
+        class="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl animate-float"
+    ></div>
+    <div
+        class="absolute bottom-20 right-10 w-32 h-32 bg-secondary/20 rounded-full blur-xl animate-float"
+        style="animation-delay: 1s"
+    ></div>
+    <div
+        class="absolute top-40 right-20 w-16 h-16 bg-accent/20 rounded-full blur-xl animate-float"
+        style="animation-delay: 2s"
+    ></div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Content -->
+            <div class="space-y-8">
+
+                <h2 class="text-4xl lg:text-5xl font-bold text-foreground">
+                    Our <span class="text-gradient">Services</span>
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-2xl text-muted-foreground leading-relaxed">
+                        Comprehensive IT recruitment solutions tailored to your needs
+                    </p>
+                </div>
+            </div>
+            <!-- Image -->
+            <div class="relative">
+                <div
+                    class="absolute inset-0 bg-gradient-primary rounded-lg transform rotate-3 opacity-20"
+                ></div>
+                <img
+                    src="https://img.freepik.com/free-photo/standard-quality-control-collage-concept_23-2149595850.jpg"
+                    alt="Modern workspace environment"
+                    class="relative rounded-lg shadow-elegant w-full h-auto hover-scale"
+                />
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Wave -->
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 320" class="w-full h-20 fill-muted/20">
+            <path
+                d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,128C960,117,1056,75,1152,74.7C1248,75,1344,117,1392,138.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            ></path>
+        </svg>
+    </div>
+</section>
+
+<section id="features" class="py-20 lg:py-32 relative overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                How We Can Help
+            </h2>
+        </div>
+
+        <!-- Features -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+            @for (feature of features; track feature.title) {
+                <div class="group rounded-lg border-0 bg-gradient-subtle hover:shadow-elegant transition-all duration-300 hover:-translate-y-2">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold group-hover:text-primary transition-colors">{{ feature.title }}</h3>
+                        <p class="text-base leading-relaxed text-muted-foreground mt-2">{{ feature.description }}</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="py-24 bg-background">
+    <div class="container mx-auto px-4">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-foreground mb-4">
+                Our Recruitment Process
+            </h2>
+        </div>
+
+        <!-- Steps Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            @for (step of steps; track step.number) {
+                <div class="text-center group">
+                    <div class="relative mb-6">
+                        <div
+                            class="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-xl mb-4 group-hover:bg-primary/20 transition-colors duration-300"
+                        >
+                            {{ step.number }}
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-foreground mb-3">
+                        {{ step.title }}
+                    </h3>
+                    <p class="text-muted-foreground leading-relaxed">
+                        {{ step.description }}
+                    </p>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

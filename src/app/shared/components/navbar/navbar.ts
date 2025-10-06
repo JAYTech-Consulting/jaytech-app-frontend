@@ -13,11 +13,9 @@ export class Navbar {
     isMenuOpen = false;
 
     navigation = [
-        { name: 'Home', href: '#home' },
+        { name: 'Home', href: '/' },
         { name: 'About Us', href: '/about-us', isRoute: true },
         { name: 'Services', href: '/services', isRoute: true },
-        { name: 'For Companies', href: '/for-companies', isRoute: true },
-        { name: 'For Job Seekers', href: '/for-job-seekers', isRoute: true },
         { name: 'Contact Us', href: '/contact-us', isRoute: true },
     ];
 

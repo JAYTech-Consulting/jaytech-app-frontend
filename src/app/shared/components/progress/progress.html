@@ -1,0 +1,12 @@
+<div
+    role="progressbar"
+    aria-valuemin="0"
+    [attr.aria-valuemax]="100"
+    [attr.aria-valuenow]="valueClamped"
+    [class]="rootClass"
+>
+    <div
+        class="h-full w-full flex-1 transition-transform duration-300 ease-out origin-left"
+        [ngStyle]="{ transform: indicatorTransform }"
+    ></div>
+</div>

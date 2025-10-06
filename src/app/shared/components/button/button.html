@@ -1,1 +1,11 @@
-<ng-content></ng-content>
+@if (asChild) {
+    <ng-container >
+        <ng-content></ng-content>
+    </ng-container>
+} @else {
+    <ng-container >
+        <button [attr.type]="type" [attr.disabled]="disabled ? true : null">
+            <ng-content></ng-content>
+        </button>
+    </ng-container>
+}

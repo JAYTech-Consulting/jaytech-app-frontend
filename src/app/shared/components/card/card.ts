@@ -1,17 +1,17 @@
-import { Component, Input } from '@angular/core';
-import { CapitalizePipe } from '../../pipes/capitalize-pipe';
-import { NgClass } from '@angular/common';
+import { Component, Input, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-card',
-    imports: [],
     templateUrl: './card.html',
-    styleUrl: './card.css',
+    styleUrls: ['./card.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Card {
-    @Input() image!: string;
-    @Input() icon!: string; // Could be an icon class or SVG path
-    @Input() title!: string;
-    @Input() description!: string;
-    @Input() features: string[] = [];
+    /** optional extra classes */
+    @Input() className = '';
+
+    @HostBinding('class')
+    get hostClass(): string {
+        return ['app-card', this.className].filter(Boolean).join(' ');
+    }
 }

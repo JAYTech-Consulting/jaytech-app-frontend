@@ -1,7 +1,7 @@
 import {
-    ApplicationConfig,
+    ApplicationConfig, importProvidersFrom,
     provideBrowserGlobalErrorListeners,
-    provideZoneChangeDetection,
+    provideZoneChangeDetection
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
@@ -16,5 +16,6 @@ export const appConfig: ApplicationConfig = {
         provideHttpClient(withInterceptorsFromDi()),
         Header,
         provideRouter(appRoutes),
-    ],
+
+    ]
 };
