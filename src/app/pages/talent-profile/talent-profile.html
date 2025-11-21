@@ -1,0 +1,327 @@
+<div class="min-h-screen bg-gradient-subtle py-6">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+        <!-- Header -->
+        <div class="mb-6">
+            <h1 class="text-2xl md:text-3xl font-bold text-foreground mb-1">
+                Complete Your <span class="text-gradient">Talent Profile</span>
+            </h1>
+            <p class="text-sm text-muted-foreground">
+                Provide your details to help us find the perfect opportunity for you.
+            </p>
+        </div>
+
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="space-y-6">
+            <!-- Personal Information Section (PII) -->
+            <app-card class="shadow-elegant">
+                <app-card-header class="pb-3">
+                    <app-card-title class="text-lg">Personal Information</app-card-title>
+                    <app-card-description class="text-xs">
+                        Your private personal details (Securely stored)
+                    </app-card-description>
+                </app-card-header>
+                <app-card-content class="space-y-4 pt-0">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="space-y-3">
+                            <app-label for="firstName" class="text-sm mb-1">First Name *</app-label>
+                            <app-input
+                                id="firstName"
+                                formControlName="firstName"
+                                placeholder="Enter your first name"
+                            ></app-input>
+                            @if (f['firstName'].touched && f['firstName'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">First name is required</p>
+                            }
+                        </div>
+
+                        <div class="space-y-3">
+                            <app-label for="lastName" class="text-sm mb-1">Last Name *</app-label>
+                            <app-input
+                                id="lastName"
+                                formControlName="lastName"
+                                placeholder="Enter your last name"
+                            ></app-input>
+                            @if (f['lastName'].touched && f['lastName'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Last name is required</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 py-2">
+                        <div class="space-y-3">
+                            <app-label for="email" class="text-sm mb-1">Email Address *</app-label>
+                            <app-input
+                                id="email"
+                                formControlName="email"
+                                type="email"
+                                placeholder="your.email@example.com"
+                            ></app-input>
+                            @if (f['email'].touched && f['email'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Valid email is required</p>
+                            }
+                        </div>
+
+                        <div class="space-y-3">
+                            <app-label for="phone" class="text-sm mb-1">Phone Number *</app-label>
+                            <app-input
+                                id="phone"
+                                formControlName="phone"
+                                type="tel"
+                                placeholder="10-digit mobile number"
+                            ></app-input>
+                            @if (f['phone'].touched && f['phone'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Valid 10-digit phone number is required</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 py-2">
+                        <app-label for="address" class="text-sm mb-1">Street Address *</app-label>
+                        <app-input
+                            id="address"
+                            formControlName="address"
+                            placeholder="123 Main St, Apt 4B"
+                        ></app-input>
+                        @if (f['address'].touched && f['address'].invalid) {
+                            <p class="text-xs text-red-600 mt-2">Address is required</p>
+                        }
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-4 py-2">
+                        <div class="space-y-3">
+                            <app-label for="city" class="text-sm mb-1">City *</app-label>
+                            <app-input
+                                id="city"
+                                formControlName="city"
+                                placeholder="City"
+                            ></app-input>
+                            @if (f['city'].touched && f['city'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">City is required</p>
+                            }
+                        </div>
+                        <div class="space-y-3">
+                            <app-label for="state" class="text-sm mb-1">State *</app-label>
+                            <app-input
+                                id="state"
+                                formControlName="state"
+                                placeholder="State"
+                            ></app-input>
+                            @if (f['state'].touched && f['state'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">State is required</p>
+                            }
+                        </div>
+                        <div class="space-y-3">
+                            <app-label for="zipCode" class="text-sm mb-1">Zip Code *</app-label>
+                            <app-input
+                                id="zipCode"
+                                formControlName="zipCode"
+                                placeholder="Zip Code"
+                            ></app-input>
+                            @if (f['zipCode'].touched && f['zipCode'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Valid Zip Code is required</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 py-2">
+                        <div class="space-y-3">
+                            <app-label for="dob" class="text-sm mb-1">Date of Birth *</app-label>
+                            <app-input
+                                id="dob"
+                                formControlName="dob"
+                                type="date"
+                            ></app-input>
+                            @if (f['dob'].touched && f['dob'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Date of Birth is required</p>
+                            }
+                        </div>
+                        <div class="space-y-3">
+                            <app-label for="ssnLast4" class="text-sm mb-1">SSN (Last 4 Digits) *</app-label>
+                            <app-input
+                                id="ssnLast4"
+                                formControlName="ssnLast4"
+                                placeholder="XXXX"
+                                maxlength="4"
+                                type="password"
+                            ></app-input>
+                            @if (f['ssnLast4'].touched && f['ssnLast4'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Last 4 digits of SSN are required</p>
+                            }
+                        </div>
+                    </div>
+                </app-card-content>
+            </app-card>
+
+            <!-- Professional Details Section -->
+            <app-card class="shadow-elegant">
+                <app-card-header class="pb-3">
+                    <app-card-title class="text-lg">Professional Details</app-card-title>
+                    <app-card-description class="text-xs">
+                        Your skills and experience
+                    </app-card-description>
+                </app-card-header>
+                <app-card-content class="space-y-4 pt-0 py-4">
+                    <div class="grid md:grid-cols-2 gap-4 py-2">
+                        <div class="space-y-3">
+                            <app-label for="currentTitle" class="text-sm mb-1">Current Job Title *</app-label>
+                            <app-input
+                                id="currentTitle"
+                                formControlName="currentTitle"
+                                placeholder="e.g., Senior Software Engineer"
+                            ></app-input>
+                            @if (f['currentTitle'].touched && f['currentTitle'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Current title is required</p>
+                            }
+                        </div>
+
+                        <div class="space-y-3">
+                            <app-label for="yearsOfExperience" class="text-sm mb-1">Years of Experience *</app-label>
+                            <app-input
+                                id="yearsOfExperience"
+                                formControlName="yearsOfExperience"
+                                type="number"
+                                min="0"
+                                placeholder="e.g., 5"
+                            ></app-input>
+                            @if (f['yearsOfExperience'].touched && f['yearsOfExperience'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Years of experience is required</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 py-2">
+                        <app-label for="skills" class="text-sm mb-1">Skills (Comma Separated) *</app-label>
+                        <textarea
+                            id="skills"
+                            formControlName="skills"
+                            rows="3"
+                            placeholder="e.g., Angular, TypeScript, Node.js, AWS, Python..."
+                            class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
+                        ></textarea>
+                        @if (f['skills'].touched && f['skills'].invalid) {
+                            <p class="text-xs text-red-600 mt-2">Skills are required</p>
+                        }
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 py-2">
+                        <div class="space-y-3">
+                            <app-label for="linkedInUrl" class="text-sm mb-1">LinkedIn URL</app-label>
+                            <app-input
+                                id="linkedInUrl"
+                                formControlName="linkedInUrl"
+                                type="url"
+                                placeholder="https://linkedin.com/in/username"
+                            ></app-input>
+                            @if (f['linkedInUrl'].touched && f['linkedInUrl'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Invalid URL</p>
+                            }
+                        </div>
+                        <div class="space-y-3">
+                            <app-label for="portfolioUrl" class="text-sm mb-1">Portfolio URL</app-label>
+                            <app-input
+                                id="portfolioUrl"
+                                formControlName="portfolioUrl"
+                                type="url"
+                                placeholder="https://myportfolio.com"
+                            ></app-input>
+                            @if (f['portfolioUrl'].touched && f['portfolioUrl'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Invalid URL</p>
+                            }
+                        </div>
+                    </div>
+                </app-card-content>
+            </app-card>
+
+            <!-- Job Preferences Section -->
+            <app-card class="shadow-elegant">
+                <app-card-header class="pb-3">
+                    <app-card-title class="text-lg">Job Preferences</app-card-title>
+                    <app-card-description class="text-xs">
+                        What kind of role are you looking for?
+                    </app-card-description>
+                </app-card-header>
+                <app-card-content class="space-y-4 pt-0 py-4">
+                    <div class="grid md:grid-cols-2 gap-4 py-2">
+                        <div class="space-y-3">
+                            <app-label for="preferredRole" class="text-sm mb-1">Preferred Role Title *</app-label>
+                            <app-input
+                                id="preferredRole"
+                                formControlName="preferredRole"
+                                placeholder="e.g., Full Stack Developer"
+                            ></app-input>
+                            @if (f['preferredRole'].touched && f['preferredRole'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Preferred role is required</p>
+                            }
+                        </div>
+
+                        <div class="space-y-3">
+                            <app-label for="expectedSalary" class="text-sm mb-1">Expected Salary (Annual) *</app-label>
+                            <app-input
+                                id="expectedSalary"
+                                formControlName="expectedSalary"
+                                placeholder="e.g., $120,000"
+                            ></app-input>
+                            @if (f['expectedSalary'].touched && f['expectedSalary'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Expected salary is required</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 py-2">
+                        <div class="space-y-3">
+                            <app-label for="employmentType" class="text-sm mb-1">Employment Type *</app-label>
+                            <select
+                                id="employmentType"
+                                formControlName="employmentType"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none cursor-pointer"
+                            >
+                                <option value="">Select type</option>
+                                @for (type of employmentTypes; track type) {
+                                    <option [value]="type">{{ type }}</option>
+                                }
+                            </select>
+                            @if (f['employmentType'].touched && f['employmentType'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Employment type is required</p>
+                            }
+                        </div>
+
+                        <div class="flex items-center space-x-2 pt-8">
+                            <input
+                                type="checkbox"
+                                id="relocation"
+                                formControlName="relocation"
+                                class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                            />
+                            <app-label for="relocation" class="text-sm mb-0 cursor-pointer">Open to Relocation</app-label>
+                        </div>
+                    </div>
+                </app-card-content>
+            </app-card>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end gap-3 pt-2">
+                <a routerLink="/dashboard">
+                    <app-button variant="outline" size="default" type="button">
+                        Cancel
+                    </app-button>
+                </a>
+                <app-button
+                    type="submit"
+                    size="default"
+                    [disabled]="isSubmitting || profileForm.invalid"
+                    class="bg-gradient-primary hover:opacity-90 transition-all duration-300 shadow-elegant"
+                >
+                    @if (isSubmitting) {
+                        <div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+                        Saving...
+                    } @else {
+                        Save Talent Profile
+                        <svg class="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14"></path>
+                            <path d="M12 5l7 7-7 7"></path>
+                        </svg>
+                    }
+                </app-button>
+            </div>
+        </form>
+    </div>
+</div>

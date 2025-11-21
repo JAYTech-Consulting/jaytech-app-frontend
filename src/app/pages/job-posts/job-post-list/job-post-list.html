@@ -1,0 +1,96 @@
+<div class="min-h-screen bg-gradient-subtle py-6">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold text-foreground mb-1">
+                    Job Posts
+                </h1>
+                <p class="text-sm text-muted-foreground">
+                    Manage your job listings and track their status
+                </p>
+            </div>
+            <a routerLink="/recruiter/jobs/new">
+                <app-button class="bg-gradient-primary shadow-elegant">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Create New Job
+                </app-button>
+            </a>
+        </div>
+
+        @if (isLoading) {
+        <div class="flex justify-center py-12">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        </div>
+        } @else if (jobs.length === 0) {
+        <app-card class="text-center py-12 shadow-elegant">
+            <app-card-content>
+                <div class="mx-auto w-16 h-16 bg-muted/30 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-8 h-8 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-foreground mb-2">No job posts yet</h3>
+                <p class="text-muted-foreground mb-6">Get started by creating your first job listing.</p>
+                <a routerLink="/recruiter/jobs/new">
+                    <app-button variant="outline">Create Job</app-button>
+                </a>
+            </app-card-content>
+        </app-card>
+        } @else {
+        <div class="grid gap-4">
+            @for (job of jobs; track job.id) {
+            <app-card class="shadow-sm hover:shadow-md transition-shadow duration-200">
+                <app-card-content class="p-6">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-3">
+                                <h3 class="text-lg font-semibold text-foreground">{{ job.title }}</h3>
+                                <span
+                                    [class]="'px-2.5 py-0.5 rounded-full text-xs font-medium border ' + getStatusClass(job.status)">
+                                    {{ getStatusLabel(job.status) }}
+                                </span>
+                            </div>
+                            <div class="flex items-center gap-4 text-sm text-muted-foreground">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    {{ job.location }}
+                                </span>
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Posted {{ job.createdAt | date:'mediumDate' }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a [routerLink]="['/recruiter/jobs', job.id, 'applicants']">
+                                <app-button variant="outline" size="sm">
+                                    View Applicants
+                                </app-button>
+                            </a>
+                            <a [routerLink]="['/recruiter/jobs', job.id]">
+                                <app-button variant="outline" size="sm">
+                                    Edit
+                                </app-button>
+                            </a>
+                        </div>
+                    </div>
+                </app-card-content>
+            </app-card>
+            }
+        </div>
+        }
+    </div>
+</div>

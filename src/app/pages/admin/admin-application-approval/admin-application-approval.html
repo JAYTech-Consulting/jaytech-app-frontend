@@ -1,0 +1,45 @@
+<div class="min-h-screen bg-gray-100 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Application Approvals</h1>
+            <a routerLink="/admin/dashboard" class="text-indigo-600 hover:text-indigo-900">Back to Dashboard</a>
+        </div>
+
+        <div *ngIf="isLoading" class="flex justify-center py-12">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        </div>
+
+        <div *ngIf="!isLoading && applications.length === 0" class="bg-white shadow rounded-lg p-6 text-center">
+            <p class="text-gray-500">No applications pending approval.</p>
+        </div>
+
+        <div *ngIf="!isLoading && applications.length > 0" class="space-y-4">
+            <div *ngFor="let app of applications" class="bg-white shadow rounded-lg p-6">
+                <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                        <h2 class="text-xl font-bold text-gray-900">{{ app.jobTitle }}</h2>
+                        <div class="mt-2 text-sm text-gray-600">
+                            <p><span class="font-medium">Applicant:</span> {{ app.applicantName }}</p>
+                            <p><span class="font-medium">Email:</span> {{ app.applicantEmail }}</p>
+                            <p><span class="font-medium">Experience:</span> {{ app.experience }}</p>
+                            <p><span class="font-medium">Skills:</span> {{ app.skills.join(', ') }}</p>
+                            <p><span class="font-medium">Applied:</span> {{ app.appliedDate | date }}</p>
+                        </div>
+                        <div *ngIf="app.resumeUrl" class="mt-3">
+                            <a [href]="app.resumeUrl" target="_blank"
+                                class="text-indigo-600 hover:text-indigo-900 text-sm">
+                                View Resume →
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <button (click)="approveApplication(app)"
+                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            Approve
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Button } from '../../shared/components/button/button';
 import { Label } from '../../shared/components/label/label';
 import { InputComponent } from '../../shared/components/input/input';
@@ -11,7 +11,8 @@ import { Card } from '../../shared/components/card/card';
 import { CardHeader } from '../../shared/components/card-header/card-header';
 import { Separator } from '../../shared/components/separator/separator';
 import { Checkbox } from '../../shared/components/checkbox/checkbox';
-import { ToastService } from '../../shared/components/toast-container/toast.service'; // optional, replace if you use another toast-container
+import { ToastService } from '../../shared/components/toast-container/toast.service';
+import { Auth } from '../../services/auth';
 
 @Component({
     selector: 'app-login',
@@ -39,15 +40,21 @@ export class Login {
 
     constructor(
         private fb: FormBuilder,
-        private toast: ToastService, // optional
+        private toast: ToastService,
+        private auth: Auth,
+        private router: Router,
     ) {
         this.form = this.fb.group({
+            role: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required],
             rememberMe: [false],
         });
     }
 
+    get role() {
+        return this.form.get('role');
+    }
     get email() {
         return this.form.get('email');
     }
@@ -63,19 +70,28 @@ export class Login {
 
         this.isLoading = true;
 
-        // simulate API
-        await new Promise((r) => setTimeout(r, 2000));
+        const { email, password, role } = this.form.value;
+        const result = await this.auth.login(email, password, role);
 
-        try {
-            this.toast?.success?.('Welcome back! Login successful.');
-        } catch {
-            // fallback
-            // eslint-disable-next-line no-console
-            console.info('Welcome back! Login successful.');
+        if (result.success) {
+            try {
+                this.toast?.success?.('Welcome back! Login successful.');
+            } catch {
+                // eslint-disable-next-line no-console
+                console.info('Welcome back! Login successful.');
+            }
+            // Redirect to dashboard
+            this.router.navigateByUrl('/dashboard');
+        } else {
+            try {
+                this.toast?.error?.(result.message || 'Login failed. Please try again.');
+            } catch {
+                // eslint-disable-next-line no-console
+                console.error(result.message || 'Login failed');
+            }
         }
 
         this.isLoading = false;
-        // this.router.navigateByUrl('/dashboard'); // example
     }
 
     handleSocialLogin(provider: string) {

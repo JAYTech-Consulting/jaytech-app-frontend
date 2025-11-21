@@ -1,1 +1,250 @@
-<p>profile works!</p>
+<div class="min-h-screen bg-gradient-subtle py-6">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+        <!-- Header -->
+        <div class="mb-6">
+            <h1 class="text-2xl md:text-3xl font-bold text-foreground mb-1">
+                Complete Your <span class="text-gradient">Recruiter Profile</span>
+            </h1>
+            <p class="text-sm text-muted-foreground">
+                Fill in your details to help us connect you with the right talent
+            </p>
+        </div>
+
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="space-y-6">
+            <!-- Personal Information Section -->
+            <app-card class="shadow-elegant">
+                <app-card-header class="pb-3">
+                    <app-card-title class="text-lg">Personal Information</app-card-title>
+                    <app-card-description class="text-xs">
+                        Your basic contact and location details
+                    </app-card-description>
+                </app-card-header>
+                <app-card-content class="space-y-4 pt-0">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="space-y-3">
+                            <app-label for="firstName" class="text-sm mb-1">First Name *</app-label>
+                            <app-input
+                                id="firstName"
+                                formControlName="firstName"
+                                placeholder="Enter your first name"
+                            ></app-input>
+                            @if (f['firstName'].touched && f['firstName'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">First name is required</p>
+                            }
+                        </div>
+
+                        <div class="space-y-3">
+                            <app-label for="lastName" class="text-sm mb-1">Last Name *</app-label>
+                            <app-input
+                                id="lastName"
+                                formControlName="lastName"
+                                placeholder="Enter your last name"
+                            ></app-input>
+                            @if (f['lastName'].touched && f['lastName'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Last name is required</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 py-4">
+                        <div class="space-y-3">
+                            <app-label for="email" class="text-sm mb-1">Email Address *</app-label>
+                            <app-input
+                                id="email"
+                                formControlName="email"
+                                type="email"
+                                placeholder="your.email@company.com"
+                            ></app-input>
+                            @if (f['email'].touched && f['email'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Valid email is required</p>
+                            }
+                        </div>
+
+                        <div class="space-y-3">
+                            <app-label for="phone" class="text-sm mb-1">Phone Number *</app-label>
+                            <app-input
+                                id="phone"
+                                formControlName="phone"
+                                type="tel"
+                                placeholder="10-digit mobile number"
+                            ></app-input>
+                            @if (f['phone'].touched && f['phone'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Valid 10-digit phone number is required</p>
+                            }
+                        </div>
+                    </div>
+                </app-card-content>
+            </app-card>
+
+            <!-- Professional Details Section -->
+            <app-card class="shadow-elegant">
+                <app-card-header class="pb-3">
+                    <app-card-title class="text-lg">Professional Details</app-card-title>
+                    <app-card-description class="text-xs">
+                        Your current role and company information
+                    </app-card-description>
+                </app-card-header>
+                <app-card-content class="space-y-4 pt-0 py-4">
+                    <div class="grid md:grid-cols-2 gap-4 py-4">
+                        <div class="space-y-3">
+                            <app-label for="designation" class="text-sm mb-1">Designation/Job Title *</app-label>
+                            <app-input
+                                id="designation"
+                                formControlName="designation"
+                                placeholder="e.g., Senior Recruiter, HR Manager"
+                            ></app-input>
+                            @if (f['designation'].touched && f['designation'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Designation is required</p>
+                            }
+                        </div>
+
+                        <div class="space-y-3">
+                            <app-label for="currentCompany" class="text-sm mb-1">Current Company *</app-label>
+                            <app-input
+                                id="currentCompany"
+                                formControlName="currentCompany"
+                                placeholder="Company name"
+                            ></app-input>
+                            @if (f['currentCompany'].touched && f['currentCompany'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Company name is required</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 py-4">
+                        <div class="space-y-3">
+                            <app-label for="industry" class="text-sm mb-1">Industry *</app-label>
+                            <select
+                                id="industry"
+                                formControlName="industry"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none cursor-pointer"
+                            >
+                                <option value="">Select industry</option>
+                                @for (industry of industries; track industry) {
+                                    <option [value]="industry">{{ industry }}</option>
+                                }
+                            </select>
+                            @if (f['industry'].touched && f['industry'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Industry is required</p>
+                            }
+                        </div>
+
+                        <div class="space-y-3">
+                            <app-label for="companySize" class="text-sm mb-1">Company Size *</app-label>
+                            <select
+                                id="companySize"
+                                formControlName="companySize"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none cursor-pointer"
+                            >
+                                <option value="">Select company size</option>
+                                @for (size of companySizes; track size) {
+                                    <option [value]="size">{{ size }}</option>
+                                }
+                            </select>
+                            @if (f['companySize'].touched && f['companySize'].invalid) {
+                                <p class="text-xs text-red-600 mt-2">Company size is required</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 py-4">
+                        <app-label for="companyWebsite" class="text-sm mb-1">Company Website</app-label>
+                        <app-input
+                            id="companyWebsite"
+                            formControlName="companyWebsite"
+                            type="url"
+                            placeholder="https://www.company.com"
+                        ></app-input>
+                        @if (f['companyWebsite'].touched && f['companyWebsite'].invalid) {
+                            <p class="text-xs text-red-600 mt-2">Please enter a valid URL</p>
+                        }
+                    </div>
+                </app-card-content>
+            </app-card>
+
+            <!-- Company Brief Section -->
+            <app-card class="shadow-elegant">
+                <app-card-header class="pb-3">
+                    <app-card-title class="text-lg">Company Brief</app-card-title>
+                    <app-card-description class="text-xs">
+                        Tell us about your company, its mission, and what makes it unique
+                    </app-card-description>
+                </app-card-header>
+                <app-card-content class="space-y-3 pt-0 py-4">
+                    <div class="space-y-3">
+                        <app-label for="companyBrief" class="text-sm mb-1">Company Brief *</app-label>
+                        <textarea
+                            id="companyBrief"
+                            formControlName="companyBrief"
+                            rows="5"
+                            placeholder="Describe your company, its mission, values, culture, and what makes it a great place to work (minimum 50 characters)..."
+                            class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
+                        ></textarea>
+                        <div class="flex items-center justify-between mt-2">
+                            @if (f['companyBrief'].touched && f['companyBrief'].invalid) {
+                                <p class="text-xs text-red-600">Company brief is required (minimum 50 characters)</p>
+                            } @else {
+                                <span></span>
+                            }
+                            @if (f['companyBrief'].value) {
+                                <p class="text-xs text-muted-foreground">
+                                    {{ f['companyBrief'].value.length }}/50 characters
+                                </p>
+                            }
+                        </div>
+                    </div>
+                </app-card-content>
+            </app-card>
+
+            <!-- Contact Preferences Section -->
+            <app-card class="shadow-elegant">
+                <app-card-header class="pb-3">
+                    <app-card-title class="text-lg">Contact Preferences</app-card-title>
+                    <app-card-description class="text-xs">
+                        How would you like to be contacted?
+                    </app-card-description>
+                </app-card-header>
+                <app-card-content class="space-y-3 pt-0 py-4">
+                    <div class="space-y-3">
+                        <app-label for="preferredContactMethod" class="text-sm mb-1">Preferred Contact Method *</app-label>
+                        <select
+                            id="preferredContactMethod"
+                            formControlName="preferredContactMethod"
+                            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none cursor-pointer"
+                        >
+                            <option value="email">Email</option>
+                            <option value="phone">Phone</option>
+                            <option value="both">Both</option>
+                        </select>
+                    </div>
+                </app-card-content>
+            </app-card>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end gap-3 pt-2">
+                <a routerLink="/dashboard">
+                    <app-button variant="outline" size="default" type="button">
+                        Cancel
+                    </app-button>
+                </a>
+                <app-button
+                    type="submit"
+                    size="default"
+                    [disabled]="isSubmitting || profileForm.invalid"
+                    class="bg-gradient-primary hover:opacity-90 transition-all duration-300 shadow-elegant"
+                >
+                    @if (isSubmitting) {
+                        <div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+                        Saving...
+                    } @else {
+                        Save Profile
+                        <svg class="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14"></path>
+                            <path d="M12 5l7 7-7 7"></path>
+                        </svg>
+                    }
+                </app-button>
+            </div>
+        </form>
+    </div>
+</div>

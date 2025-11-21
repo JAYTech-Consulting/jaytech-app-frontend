@@ -1,0 +1,42 @@
+<div class="min-h-screen bg-gray-100 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Recruiters</h1>
+            <a routerLink="/admin/dashboard" class="text-indigo-600 hover:text-indigo-900">Back to Dashboard</a>
+        </div>
+
+        <div *ngIf="isLoading" class="flex justify-center py-12">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        </div>
+
+        <div *ngIf="!isLoading && recruiters.length === 0" class="bg-white shadow rounded-lg p-6 text-center">
+            <p class="text-gray-500">No recruiters found.</p>
+        </div>
+
+        <div *ngIf="!isLoading && recruiters.length > 0" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div *ngFor="let recruiter of recruiters" (click)="viewRecruiterJobs(recruiter)"
+                class="bg-white shadow rounded-lg p-6 cursor-pointer hover:shadow-lg transition-shadow duration-200 border-l-4 border-l-indigo-500">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center">
+                            <span class="text-lg font-semibold text-indigo-600">
+                                {{ getInitials(recruiter.name) }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ml-4 flex-1">
+                        <h3 class="text-lg font-medium text-gray-900">{{ recruiter.name }}</h3>
+                        <p class="text-sm text-gray-500">{{ recruiter.email }}</p>
+                        <p class="text-xs text-gray-400 mt-1 capitalize">{{ recruiter.role }}</p>
+                    </div>
+                    <div class="ml-4">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

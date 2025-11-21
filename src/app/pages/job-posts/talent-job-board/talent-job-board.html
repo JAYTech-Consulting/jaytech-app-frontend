@@ -1,0 +1,159 @@
+<div class="min-h-screen bg-gradient-subtle py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <div class="mb-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Find Your Dream Job</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Explore exciting opportunities and take the next step in your career with JayTech.
+            </p>
+        </div>
+
+        <div *ngIf="isLoading" class="flex justify-center py-12">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        </div>
+
+        <div *ngIf="!isLoading && jobs.length === 0"
+            class="text-center py-12 bg-white rounded-lg shadow-sm border border-gray-100">
+            <p class="text-gray-500 text-lg">No jobs available at the moment. Please check back later.</p>
+        </div>
+
+        <div *ngIf="!isLoading && jobs.length > 0" class="grid gap-4">
+            <app-card *ngFor="let job of jobs" (click)="openJobDetails(job)"
+                class="hover:shadow-md transition-all duration-200 cursor-pointer border-l-4 border-l-blue-500 hover:translate-x-1">
+                <app-card-content class="p-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900 mb-1">{{ job.title }}</h2>
+                            <div class="flex flex-wrap gap-4 text-sm text-gray-500">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    {{ job.location }}
+                                </span>
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                    {{ job.salaryRange }}
+                                </span>
+                                <span
+                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                                    {{ job.employmentType }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-blue-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </app-card-content>
+            </app-card>
+        </div>
+    </div>
+
+    <!-- Job Details Modal -->
+    <div *ngIf="selectedJob" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity backdrop-blur-sm"
+                (click)="closeJobDetails()" aria-hidden="true"></div>
+
+            <!-- Modal panel -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-2xl leading-6 font-bold text-gray-900" id="modal-title">
+                                    {{ selectedJob.title }}
+                                </h3>
+                                <button (click)="closeJobDetails()"
+                                    class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="flex flex-wrap gap-4 text-sm text-gray-500 mb-6 pb-4 border-b border-gray-100">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    {{ selectedJob.location }}
+                                </span>
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                    {{ selectedJob.salaryRange }}
+                                </span>
+                                <span
+                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                    {{ selectedJob.employmentType }}
+                                </span>
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Posted {{ selectedJob.createdAt | date }}
+                                </span>
+                            </div>
+
+                            <div class="mb-6">
+                                <h4 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">Description
+                                </h4>
+                                <p class="text-gray-600 whitespace-pre-line">{{ selectedJob.description }}</p>
+                            </div>
+
+                            <div class="mb-6">
+                                <h4 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">Requirements
+                                </h4>
+                                <p class="text-gray-600 whitespace-pre-line">{{ selectedJob.requirements }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <app-button (click)="apply(selectedJob)" [disabled]="isApplying(selectedJob.id)"
+                        class="w-full sm:w-auto sm:ml-3 bg-blue-600 hover:bg-blue-700 text-white shadow-md">
+                        <span *ngIf="isApplying(selectedJob.id)" class="flex items-center justify-center">
+                            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                </path>
+                            </svg>
+                            Applying...
+                        </span>
+                        <span *ngIf="!isApplying(selectedJob.id)">Apply Now</span>
+                    </app-button>
+                    <app-button variant="outline" (click)="closeJobDetails()" class="mt-3 w-full sm:mt-0 sm:w-auto">
+                        Cancel
+                    </app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

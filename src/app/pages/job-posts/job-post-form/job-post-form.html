@@ -1,0 +1,110 @@
+<div class="min-h-screen bg-gradient-subtle py-6">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+        <!-- Header -->
+        <div class="mb-6">
+            <h1 class="text-2xl md:text-3xl font-bold text-foreground mb-1">
+                {{ isEditMode ? 'Edit Job Post' : 'Create New Job Post' }}
+            </h1>
+            <p class="text-sm text-muted-foreground">
+                {{ isEditMode ? 'Update the details of your job listing' : 'Fill in the details to post a new job
+                opening' }}
+            </p>
+        </div>
+
+        <form [formGroup]="jobForm" (ngSubmit)="onSubmit()" class="space-y-6">
+            <app-card class="shadow-elegant">
+                <app-card-content class="space-y-4 pt-6">
+
+                    <!-- Title -->
+                    <div class="space-y-3">
+                        <app-label for="title" class="text-sm mb-1">Job Title *</app-label>
+                        <app-input id="title" formControlName="title"
+                            placeholder="e.g., Senior Frontend Developer"></app-input>
+                        @if (f['title'].touched && f['title'].invalid) {
+                        <p class="text-xs text-red-600 mt-2">Job title is required</p>
+                        }
+                    </div>
+
+                    <!-- Location & Employment Type -->
+                    <div class="grid md:grid-cols-2 gap-4 py-2">
+                        <div class="space-y-3">
+                            <app-label for="location" class="text-sm mb-1">Location *</app-label>
+                            <app-input id="location" formControlName="location"
+                                placeholder="e.g., Remote, New York, NY"></app-input>
+                            @if (f['location'].touched && f['location'].invalid) {
+                            <p class="text-xs text-red-600 mt-2">Location is required</p>
+                            }
+                        </div>
+
+                        <div class="space-y-3">
+                            <app-label for="employmentType" class="text-sm mb-1">Employment Type *</app-label>
+                            <select id="employmentType" formControlName="employmentType"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 appearance-none cursor-pointer">
+                                <option value="">Select type</option>
+                                @for (type of employmentTypes; track type) {
+                                <option [value]="type">{{ type }}</option>
+                                }
+                            </select>
+                            @if (f['employmentType'].touched && f['employmentType'].invalid) {
+                            <p class="text-xs text-red-600 mt-2">Employment type is required</p>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Salary & Status -->
+                    <div class="grid md:grid-cols-2 gap-4 py-2">
+                        <div class="space-y-3">
+                            <app-label for="salaryRange" class="text-sm mb-1">Salary Range *</app-label>
+                            <app-input id="salaryRange" formControlName="salaryRange"
+                                placeholder="e.g., $100k - $130k"></app-input>
+                            @if (f['salaryRange'].touched && f['salaryRange'].invalid) {
+                            <p class="text-xs text-red-600 mt-2">Salary range is required</p>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="space-y-3 py-2">
+                        <app-label for="description" class="text-sm mb-1">Job Description *</app-label>
+                        <textarea id="description" formControlName="description" rows="6"
+                            placeholder="Detailed description of the role..."
+                            class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"></textarea>
+                        @if (f['description'].touched && f['description'].invalid) {
+                        <p class="text-xs text-red-600 mt-2">Description is required (min 50 chars)</p>
+                        }
+                    </div>
+
+                    <!-- Requirements -->
+                    <div class="space-y-3 py-2">
+                        <app-label for="requirements" class="text-sm mb-1">Requirements *</app-label>
+                        <textarea id="requirements" formControlName="requirements" rows="4"
+                            placeholder="List key requirements, skills, and qualifications..."
+                            class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"></textarea>
+                        @if (f['requirements'].touched && f['requirements'].invalid) {
+                        <p class="text-xs text-red-600 mt-2">Requirements are required</p>
+                        }
+                    </div>
+
+                </app-card-content>
+            </app-card>
+
+            <!-- Actions -->
+            <div class="flex justify-end gap-3">
+                <a routerLink="/recruiter/jobs">
+                    <app-button variant="outline" size="default" type="button">
+                        Cancel
+                    </app-button>
+                </a>
+                <app-button type="submit" size="default" [disabled]="isSubmitting || jobForm.invalid"
+                    class="bg-gradient-primary hover:opacity-90 transition-all duration-300 shadow-elegant">
+                    @if (isSubmitting) {
+                    <div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+                    Saving...
+                    } @else {
+                    {{ isEditMode ? 'Update Job' : 'Create Job' }}
+                    }
+                </app-button>
+            </div>
+        </form>
+    </div>
+</div>

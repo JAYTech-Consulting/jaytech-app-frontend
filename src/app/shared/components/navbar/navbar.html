@@ -37,18 +37,83 @@
                 </div>
             </div>
 
-            <!-- Desktop CTA & Theme Toggle -->
+            <!-- Desktop CTA & Profile -->
             <div class="hidden md:flex items-center space-x-4">
-                <a routerLink="/login"
-                    ><app-button variant="outline" size="sm">Sign In</app-button></a
-                >
-                <a routerLink="/register">
-                    <app-button
-                        size="sm"
-                        class="bg-gradient-primary hover:opacity-90 transition-opacity"
-                        >Get Started</app-button
+                @if (isLoggedIn) {
+                    <!-- Profile Avatar Dropdown -->
+                    <div class="relative profile-menu-container">
+                        <button
+                            (click)="toggleProfileMenu()"
+                            class="flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] rounded-full bg-gradient-primary hover:opacity-90 transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 shadow-elegant border-2 border-primary/20 cursor-pointer"
+                            aria-label="User profile menu"
+                            [title]="auth.getUser()?.name || 'User'"
+                            type="button"
+                        >
+                            @if (getUserInitials()) {
+                                <span class="text-sm font-semibold text-primary-foreground leading-none">
+                                    {{ getUserInitials() }}
+                                </span>
+                            } @else {
+                                <svg
+                                    class="w-5 h-5 text-primary-foreground"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path>
+                                    <path d="M4 20a8 8 0 0 1 16 0"></path>
+                                </svg>
+                            }
+                        </button>
+
+                        @if (isProfileMenuOpen) {
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-elegant z-50 animate-slide-up"
+                            >
+                                <div class="py-2">
+                                    <div class="px-4 py-2 border-b border-border">
+                                        <p class="text-sm font-medium text-foreground">
+                                            {{ auth.getUser()?.name || 'User' }}
+                                        </p>
+                                        <p class="text-xs text-muted-foreground">
+                                            {{ auth.getUser()?.email }}
+                                        </p>
+                                        <p class="text-xs text-primary mt-1 capitalize">
+                                            {{ auth.getUser()?.role }}
+                                        </p>
+                                    </div>
+                                    <button
+                                        (click)="goToProfile()"
+                                        class="w-full text-left px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                                    >
+                                        Profile
+                                    </button>
+                                    <button
+                                        (click)="logout()"
+                                        class="w-full text-left px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                                    >
+                                        Logout
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                } @else {
+                    <a routerLink="/login"
+                        ><app-button variant="outline" size="sm">Sign In</app-button></a
                     >
-                </a>
+                    <a routerLink="/register">
+                        <app-button
+                            size="sm"
+                            class="bg-gradient-primary hover:opacity-90 transition-opacity"
+                            >Get Started</app-button
+                        >
+                    </a>
+                }
             </div>
 
             <!-- Mobile menu button -->
@@ -87,20 +152,57 @@
                         }
                     }
                     <div class="pt-4 pb-3 border-t border-border">
-                        <div class="flex items-center space-x-3 mt-3">
-                            <a routerLink="/login" class="flex-1">
-                                <app-button variant="outline" size="sm" class="w-full"
-                                    >Sign In</app-button
+                        @if (isLoggedIn) {
+                            <!-- Mobile Profile Section with Avatar -->
+                            <div class="px-3 py-2 space-y-3">
+                                <div class="flex items-center space-x-3 pb-3 border-b border-border">
+                                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary shadow-elegant border-2 border-primary/20">
+                                        <span class="text-base font-semibold text-primary-foreground">
+                                            {{ getUserInitials() }}
+                                        </span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-foreground">
+                                            {{ auth.getUser()?.name || 'User' }}
+                                        </p>
+                                        <p class="text-xs text-muted-foreground">
+                                            {{ auth.getUser()?.email }}
+                                        </p>
+                                        <p class="text-xs text-primary mt-1 capitalize">
+                                            {{ auth.getUser()?.role }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <a
+                                    routerLink="/profile"
+                                    (click)="closeMenu()"
+                                    class="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors"
                                 >
-                            </a>
-                            <a routerLink="/register" class="flex-1">
-                                <app-button
-                                    size="sm"
-                                    class="w-full bg-gradient-primary hover:opacity-90 transition-opacity"
-                                    >Get Started</app-button
+                                    Profile
+                                </a>
+                                <button
+                                    (click)="logout(); closeMenu();"
+                                    class="w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors"
                                 >
-                            </a>
-                        </div>
+                                    Logout
+                                </button>
+                            </div>
+                        } @else {
+                            <div class="flex items-center space-x-3 mt-3">
+                                <a routerLink="/login" class="flex-1" (click)="closeMenu()">
+                                    <app-button variant="outline" size="sm" class="w-full"
+                                        >Sign In</app-button
+                                    >
+                                </a>
+                                <a routerLink="/register" class="flex-1" (click)="closeMenu()">
+                                    <app-button
+                                        size="sm"
+                                        class="w-full bg-gradient-primary hover:opacity-90 transition-opacity"
+                                        >Get Started</app-button
+                                    >
+                                </a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

@@ -1,0 +1,86 @@
+/* src/app/pages/resumes/resume-preview/resume-preview.css */
+:host {
+    display: block;
+}
+
+.template-selector {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.resume-preview {
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 8.5in;
+    min-height: 11in;
+    padding: 0.5in;
+}
+
+
+/* Modern Template */
+.template-modern .header {
+    border-bottom: 3px solid var(--theme-primary, #4f46e5);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.template-modern .section-title {
+    color: var(--theme-primary, #4f46e5);
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Classic Template */
+.template-classic .header {
+    text-align: center;
+    border-bottom: 2px solid var(--theme-primary, #1f2937);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.template-classic .section-title {
+    color: var(--theme-primary, #1f2937);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #d1d5db;
+    padding-bottom: 0.25rem;
+}
+
+/* Minimal Template */
+.template-minimal .header {
+    margin-bottom: 2rem;
+}
+
+.template-minimal .section-title {
+    color: var(--theme-primary, #374151);
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+@media print {
+
+    .template-selector,
+    .no-print {
+        display: none !important;
+    }
+
+    .resume-preview {
+        box-shadow: none;
+        margin: 0;
+        padding: 0.5in;
+    }
+}

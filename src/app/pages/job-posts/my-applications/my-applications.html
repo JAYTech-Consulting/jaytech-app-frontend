@@ -1,0 +1,52 @@
+<div class="min-h-screen bg-gradient-subtle py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">My Applications</h1>
+            <p class="text-gray-600">Track the status of your job applications.</p>
+        </div>
+
+        <div *ngIf="isLoading" class="flex justify-center py-12">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        </div>
+
+        <div *ngIf="!isLoading && applications.length === 0"
+            class="text-center py-12 bg-white rounded-lg shadow-sm border border-gray-100">
+            <div class="mb-4">
+                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                    </path>
+                </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900">No applications yet</h3>
+            <p class="mt-1 text-gray-500">You haven't applied for any jobs yet.</p>
+            <div class="mt-6">
+                <a routerLink="/jobs"
+                    class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Browse Jobs
+                </a>
+            </div>
+        </div>
+
+        <div *ngIf="!isLoading && applications.length > 0" class="space-y-4">
+            <app-card *ngFor="let app of applications" class="hover:shadow-md transition-shadow duration-200">
+                <app-card-content class="p-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">{{ app.jobTitle }}</h3>
+                            <div class="text-sm text-gray-500">
+                                Applied on {{ app.appliedDate | date:'mediumDate' }}
+                            </div>
+                        </div>
+                        <div>
+                            <span [ngClass]="getStatusClass(app.status)"
+                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium capitalize">
+                                {{ app.status }}
+                            </span>
+                        </div>
+                    </div>
+                </app-card-content>
+            </app-card>
+        </div>
+    </div>
+</div>
