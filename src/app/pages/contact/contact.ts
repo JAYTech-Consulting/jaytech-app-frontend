@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Footer } from '../../shared/components/footer/footer';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
-  selector: 'app-contact',
+    selector: 'app-contact',
     imports: [
         ReactiveFormsModule,
         Footer
     ],
-  templateUrl: './contact.html',
-  styleUrl: './contact.css'
+    templateUrl: './contact.html',
+    styleUrl: './contact.css'
 })
 export class Contact {
     form: FormGroup;
@@ -18,8 +19,10 @@ export class Contact {
     contactInfo = [
         { icon: 'mail', title: 'Email Us', content: 'hr@jay-tech.co.in', description: 'Send us an email anytime' },
         { icon: 'phone', title: 'Call Us', content: '+91 94977 19321', description: 'Mon-Fri from 8am to 6pm' },
-        { icon: 'map', title: 'Visit Us', content: 'Jay-Tech Consulting, CRA B-10, Karyavattom P.O Trivandrum\n' +
-                'Landmark : Near to Backgate, Technopark', description: 'Come say hello at our office' },
+        {
+            icon: 'map', title: 'Visit Us', content: 'Jay-Tech Consulting, CRA B-10, Karyavattom P.O Trivandrum\n' +
+                'Landmark : Near to Backgate, Technopark', description: 'Come say hello at our office'
+        },
     ];
 
     features = [
@@ -35,26 +38,47 @@ export class Contact {
         { value: 'feedback', label: 'Feedback' },
     ];
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder,
+        private contactService: ContactService
+    ) {
         this.form = this.fb.group({
-            name: [''],
-            email: [''],
+            name: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
             company: [''],
-            subject: [''],
-            message: [''],
+            subject: ['', Validators.required],
+            message: ['', Validators.required],
             newsletter: [false],
         });
     }
 
     async submit() {
-        if (this.form.invalid) return;
+        if (this.form.invalid) {
+            this.form.markAllAsTouched();
+            alert('Please fill in all required fields correctly.');
+            return;
+        }
+
         this.isSubmitting = true;
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        const formData = {
+            name: this.form.value.name,
+            email: this.form.value.email,
+            subject: this.form.value.subject,
+            message: this.form.value.message
+        };
 
-        alert("Message sent successfully! We'll get back to you within 24 hours.");
-        this.form.reset();
-        this.isSubmitting = false;
+        this.contactService.submitContactForm(formData).subscribe({
+            next: (response) => {
+                alert(response.message);
+                this.form.reset();
+                this.isSubmitting = false;
+            },
+            error: (err) => {
+                alert('Failed to send message. Please try again.');
+                console.error('Error submitting contact form:', err);
+                this.isSubmitting = false;
+            }
+        });
     }
 }
