@@ -9,8 +9,10 @@ All colors MUST be HSL.
 @layer base {
     :root {
         /* Modern Color Palette */
-        --background: 220 14% 98%; /* #F9FAFB */
-        --foreground: 217 33% 17%; /* #1F2937 */
+        --background: 220 14% 98%;
+        /* #F9FAFB */
+        --foreground: 217 33% 17%;
+        /* #1F2937 */
 
         --card: 0 0% 100%;
         --card-foreground: 217 33% 17%;
@@ -18,22 +20,27 @@ All colors MUST be HSL.
         --popover: 0 0% 100%;
         --popover-foreground: 217 33% 17%;
 
-        --primary: 243 74% 59%; /* #4F46E5 Indigo */
+        --primary: 243 74% 59%;
+        /* #4F46E5 Indigo */
         --primary-foreground: 0 0% 100%;
         --primary-glow: 243 74% 70%;
 
-        --secondary: 160 84% 39%; /* #10B981 Emerald */
+        --secondary: 160 84% 39%;
+        /* #10B981 Emerald */
         --secondary-foreground: 0 0% 100%;
         --secondary-glow: 160 84% 50%;
 
         --muted: 220 14% 96%;
-        --muted-foreground: 217 10% 47%; /* #6B7280 */
+        --muted-foreground: 217 10% 47%;
+        /* #6B7280 */
 
-        --accent: 43 96% 56%; /* #F59E0B Amber */
+        --accent: 43 96% 56%;
+        /* #F59E0B Amber */
         --accent-foreground: 217 33% 17%;
         --accent-glow: 43 96% 65%;
 
-        --destructive: 0 84% 60%; /* #EF4444 */
+        --destructive: 0 84% 60%;
+        /* #EF4444 */
         --destructive-foreground: 0 0% 100%;
 
         --border: 217 10% 85%;
@@ -44,22 +51,16 @@ All colors MUST be HSL.
 
         /* Gradients */
         --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-        --gradient-secondary: linear-gradient(
-            135deg,
-            hsl(var(--secondary)),
-            hsl(var(--secondary-glow))
-        );
+        --gradient-secondary: linear-gradient(135deg,
+                hsl(var(--secondary)),
+                hsl(var(--secondary-glow)));
         --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-glow)));
-        --gradient-hero: linear-gradient(
-            135deg,
-            hsl(var(--primary)) 0%,
-            hsl(var(--secondary)) 100%
-        );
-        --gradient-subtle: linear-gradient(
-            180deg,
-            hsl(var(--background)) 0%,
-            hsl(var(--muted)) 100%
-        );
+        --gradient-hero: linear-gradient(135deg,
+                hsl(var(--primary)) 0%,
+                hsl(var(--secondary)) 100%);
+        --gradient-subtle: linear-gradient(180deg,
+                hsl(var(--background)) 0%,
+                hsl(var(--muted)) 100%);
 
         /* Shadows */
         --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.2);
@@ -73,7 +74,8 @@ All colors MUST be HSL.
     }
 
     .dark {
-        --background: 224 71% 12%; /* #111827 */
+        --background: 224 71% 12%;
+        /* #111827 */
         --foreground: 220 14% 98%;
 
         --card: 224 71% 15%;
@@ -106,22 +108,16 @@ All colors MUST be HSL.
 
         /* Dark mode gradients */
         --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-        --gradient-secondary: linear-gradient(
-            135deg,
-            hsl(var(--secondary)),
-            hsl(var(--secondary-glow))
-        );
+        --gradient-secondary: linear-gradient(135deg,
+                hsl(var(--secondary)),
+                hsl(var(--secondary-glow)));
         --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-glow)));
-        --gradient-hero: linear-gradient(
-            135deg,
-            hsl(var(--primary)) 0%,
-            hsl(var(--secondary)) 100%
-        );
-        --gradient-subtle: linear-gradient(
-            180deg,
-            hsl(var(--background)) 0%,
-            hsl(var(--muted)) 100%
-        );
+        --gradient-hero: linear-gradient(135deg,
+                hsl(var(--primary)) 0%,
+                hsl(var(--secondary)) 100%);
+        --gradient-subtle: linear-gradient(180deg,
+                hsl(var(--background)) 0%,
+                hsl(var(--muted)) 100%);
 
         /* Dark mode shadows */
         --shadow-elegant: 0 10px 30px -10px hsl(0 0% 0% / 0.3);
@@ -204,10 +200,12 @@ html,
 body {
     height: 100%;
 }
+
 body {
     margin: 0;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
 /* styles.css */
 .toast-root {
     position: fixed;
@@ -219,12 +217,70 @@ body {
     gap: 0.5rem;
     max-width: 20rem;
 }
+
 .toast {
     display: flex;
     gap: .75rem;
     padding: .6rem;
     border-radius: .5rem;
     background: white;
-    box-shadow: 0 8px 24px rgba(2,6,23,.06);
-    border-left: 4px solid #60a5fa; /* example */
+    box-shadow: 0 8px 24px rgba(2, 6, 23, .06);
+    border-left: 4px solid #60a5fa;
+    /* example */
+}
+
+@media print {
+    @page {
+        margin: 0;
+        margin-top: 1in;
+        /* Increased margin for subsequent pages */
+        margin-bottom: 0.5in;
+        size: auto;
+    }
+
+    @page :first {
+        margin-top: 0;
+        /* No top margin for the first page */
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+
+    /* Hide global navigation and footer */
+    app-navbar,
+    app-footer,
+    .template-selector,
+    .no-print {
+        display: none !important;
+    }
+
+    /* Ensure resume preview takes full width */
+    .resume-preview {
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0.5in !important;
+        padding-bottom: 1in !important;
+        /* Add padding to bottom of content */
+        width: 100% !important;
+        max-width: none !important;
+        min-height: 100vh !important;
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    /* Prevent page breaks inside items, but allow sections to split */
+    .section-title,
+    li {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* Hide any other potential containers */
+    .min-h-screen {
+        min-height: auto !important;
+        background: white !important;
+    }
 }

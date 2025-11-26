@@ -56,6 +56,9 @@ export class ResumeForm implements OnInit {
             name: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             phone: ['', Validators.required],
+            linkedin: [''],
+            github: [''],
+            website: [''],
             summary: ['', Validators.required],
             experience: this.fb.array([]),
             education: this.fb.array([]),
@@ -73,6 +76,9 @@ export class ResumeForm implements OnInit {
                         name: resume.name,
                         email: resume.email,
                         phone: resume.phone,
+                        linkedin: resume.linkedin,
+                        github: resume.github,
+                        website: resume.website,
                         summary: resume.summary
                     });
 

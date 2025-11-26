@@ -72,9 +72,21 @@
 }
 
 @media print {
+    @page {
+        margin: 0;
+        size: auto;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
 
     .template-selector,
-    .no-print {
+    .no-print,
+    app-navbar,
+    app-footer {
         display: none !important;
     }
 
@@ -82,5 +94,10 @@
         box-shadow: none;
         margin: 0;
         padding: 0.5in;
+        width: 100%;
+        max-width: none;
+        min-height: 100vh;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
     }
 }

@@ -36,6 +36,9 @@ export interface Resume {
     name: string;
     email: string;
     phone: string;
+    linkedin?: string;
+    github?: string;
+    website?: string;
     summary: string;
     experience: Experience[];
     education: Education[];
@@ -58,6 +61,9 @@ export class ResumeService {
             name: 'Sarah Johnson',
             email: 'talent@example.com',
             phone: '+1 (555) 123-4567',
+            linkedin: 'https://linkedin.com/in/sarahjohnson',
+            github: 'https://github.com/sarahjohnson',
+            website: 'https://sarahjohnson.dev',
             summary: 'Results-driven Full-Stack Software Engineer with 6+ years of experience building scalable web applications. Expertise in modern JavaScript frameworks, cloud architecture, and agile development. Proven track record of leading cross-functional teams and delivering high-impact solutions that improve user experience and business outcomes.',
             experience: [
                 {
