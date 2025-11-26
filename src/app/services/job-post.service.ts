@@ -276,6 +276,16 @@ export class JobPostService {
     getJobsByRecruiter(email: string): Observable<JobPost[]> {
         return of(this.mockJobs.filter(job => job.recruiterEmail === email)).pipe(delay(500));
     }
+
+    getTotalApplicationsForRecruiter(email: string): Observable<number> {
+        return of(this.mockJobs.filter(job => job.recruiterEmail === email)).pipe(
+            map(jobs => {
+                const jobIds = jobs.map(j => j.id);
+                return this.mockApplications.filter(app => jobIds.includes(app.jobId)).length;
+            }),
+            delay(500)
+        );
+    }
 }
 
 export type JobApplicationStatus = 'submitted' | 'pending' | 'shortlisted' | 'offered' | 'rejected';

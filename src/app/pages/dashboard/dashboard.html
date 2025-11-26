@@ -1,91 +1,271 @@
-<section class="relative min-h-[35vh] flex items-center justify-center overflow-hidden">
-    <!-- Background Gradient -->
-    <div class="absolute inset-0 bg-gradient-hero opacity-10"></div>
-
-    <!-- Floating Elements -->
-    <div class="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl animate-float"></div>
-    <div class="absolute bottom-20 right-10 w-32 h-32 bg-secondary/20 rounded-full blur-xl animate-float"
-        style="animation-delay: 1s"></div>
-    <div class="absolute top-40 right-20 w-16 h-16 bg-accent/20 rounded-full blur-xl animate-float"
-        style="animation-delay: 2s"></div>
-
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center max-w-4xl mx-auto">
-            <!-- Main Heading -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-slide-up">
-                <span class="text-gradient">Dashboard</span>
-            </h1>
-
-            <!-- Subtitle -->
-            <p class="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in"
-                style="animation-delay: 0.2s">
-                Welcome to your dashboard
-            </p>
+<div class="flex min-h-screen bg-gray-50">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 hidden md:block">
+        <div class="p-6">
+            <h2 class="text-lg font-semibold text-gray-900">Menu</h2>
         </div>
-    </div>
+        <nav class="px-4 space-y-2">
+            <!-- Admin Menu -->
+            @if (currentUser()?.role === 'admin') {
+            <a routerLink="/admin/overview"
+                class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                Admin Overview
+            </a>
+            }
 
-    <!-- Bottom Wave -->
-    <div class="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 320" class="w-full h-20 fill-muted/20">
-            <path
-                d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,128C960,117,1056,75,1152,74.7C1248,75,1344,117,1392,138.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-            </path>
-        </svg>
-    </div>
-</section>
+            <!-- Recruiter Menu -->
+            @if (currentUser()?.role === 'recruiter') {
+            <a routerLink="/recruiter/jobs/new"
+                class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Post a New Job
+            </a>
+            <a routerLink="/recruiter/jobs"
+                class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                    </path>
+                </svg>
+                Manage Jobs
+            </a>
+            }
 
-<section class="py-20 bg-gradient-subtle">
-    <div class="container mx-auto px-4">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-            <h2 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-                Your Dashboard Overview
-            </h2>
-            <p class="text-lg text-muted-foreground leading-relaxed">
-                Manage your profile, applications, and opportunities all in one place.
-            </p>
+            <!-- Talent Menu -->
+            @if (currentUser()?.role === 'talent') {
+            <a routerLink="/jobs"
+                class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                    </path>
+                </svg>
+                Browse Jobs
+            </a>
+            <a routerLink="/resumes"
+                class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                    </path>
+                </svg>
+                My Resumes
+            </a>
+            <a routerLink="/talent-profile"
+                class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                My Profile
+            </a>
+            <a routerLink="/my-applications"
+                class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4">
+                    </path>
+                </svg>
+                My Applications
+            </a>
+            }
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Welcome Section -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900">
+                    Welcome back, {{ currentUser()?.name }}!
+                </h1>
+                <p class="mt-2 text-gray-600">
+                    Here's what's happening with your account today.
+                </p>
+            </div>
+
+            <!-- Admin Dashboard -->
+            @if (currentUser()?.role === 'admin') {
+            <div class="space-y-8">
+                <!-- KPIs -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <app-card class="bg-white">
+                        <app-card-content class="p-6 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Total Users</p>
+                                <p class="text-3xl font-bold text-indigo-600">{{ totalUsers }}</p>
+                            </div>
+                            <div class="p-3 bg-indigo-100 rounded-full text-indigo-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </app-card-content>
+                    </app-card>
+
+                    <app-card class="bg-white">
+                        <app-card-content class="p-6 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Total Jobs</p>
+                                <p class="text-3xl font-bold text-blue-600">{{ totalJobs }}</p>
+                            </div>
+                            <div class="p-3 bg-blue-100 rounded-full text-blue-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </app-card-content>
+                    </app-card>
+
+                    <app-card class="bg-white">
+                        <app-card-content class="p-6 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Recruiters</p>
+                                <p class="text-3xl font-bold text-emerald-600">{{ totalRecruiters }}</p>
+                            </div>
+                            <div class="p-3 bg-emerald-100 rounded-full text-emerald-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                    </path>
+                                </svg>
+                            </div>
+                        </app-card-content>
+                    </app-card>
+
+                    <app-card class="bg-white">
+                        <app-card-content class="p-6 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Pending Approvals</p>
+                                <p class="text-3xl font-bold text-amber-600">{{ pendingApprovals }}</p>
+                            </div>
+                            <div class="p-3 bg-amber-100 rounded-full text-amber-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                        </app-card-content>
+                    </app-card>
+                </div>
+            </div>
+            }
+
+            <!-- Recruiter Dashboard -->
+            @if (currentUser()?.role === 'recruiter') {
+            <div class="space-y-8">
+                <!-- KPIs -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <app-card class="bg-white">
+                        <app-card-content class="p-6 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Active Jobs</p>
+                                <p class="text-3xl font-bold text-indigo-600">{{ activeJobs }}</p>
+                            </div>
+                            <div class="p-3 bg-indigo-100 rounded-full text-indigo-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </app-card-content>
+                    </app-card>
+
+                    <app-card class="bg-white">
+                        <app-card-content class="p-6 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Total Applicants</p>
+                                <p class="text-3xl font-bold text-emerald-600">{{ totalApplicants }}</p>
+                            </div>
+                            <div class="p-3 bg-emerald-100 rounded-full text-emerald-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </app-card-content>
+                    </app-card>
+                </div>
+            </div>
+            }
+
+            <!-- Talent Dashboard -->
+            @if (currentUser()?.role === 'talent') {
+            <div class="space-y-8">
+                <!-- KPIs -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <app-card class="bg-white">
+                        <app-card-content class="p-6 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Applied Jobs</p>
+                                <p class="text-3xl font-bold text-indigo-600">{{ jobsApplied }}</p>
+                            </div>
+                            <div class="p-3 bg-indigo-100 rounded-full text-indigo-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </app-card-content>
+                    </app-card>
+
+                    <app-card class="bg-white">
+                        <app-card-content class="p-6 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Resumes Created</p>
+                                <p class="text-3xl font-bold text-blue-600">{{ resumesCreated }}</p>
+                            </div>
+                            <div class="p-3 bg-blue-100 rounded-full text-blue-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </app-card-content>
+                    </app-card>
+
+                    <app-card class="bg-white">
+                        <app-card-content class="p-6 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Profile Views</p>
+                                <p class="text-3xl font-bold text-purple-600">{{ profileViews }}</p>
+                            </div>
+                            <div class="p-3 bg-purple-100 rounded-full text-purple-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </app-card-content>
+                    </app-card>
+                </div>
+            </div>
+            }
         </div>
+    </main>
+</div>
 
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Recruiter Profile Card -->
-            <app-card class="shadow-elegant hover:shadow-lg transition-shadow duration-300">
-                <app-card-header>
-                    <app-card-title class="text-2xl">I am a Recruiter</app-card-title>
-                    <app-card-description>
-                        Looking for top talent? Set up your company profile to start hiring.
-                    </app-card-description>
-                </app-card-header>
-                <app-card-content class="space-y-3">
-                    <a routerLink="/profile">
-                        <app-button class="w-full bg-gradient-primary">
-                            Manage Recruiter Profile
-                        </app-button>
-                    </a>
-                    <a routerLink="/recruiter/jobs">
-                        <app-button variant="outline" class="w-full">
-                            Manage Job Posts
-                        </app-button>
-                    </a>
-                </app-card-content>
-            </app-card>
-
-            <!-- Talent Profile Card -->
-            <app-card class="shadow-elegant hover:shadow-lg transition-shadow duration-300">
-                <app-card-header>
-                    <app-card-title class="text-2xl">I am a Talent</app-card-title>
-                    <app-card-description>
-                        Looking for opportunities? Create your professional profile to get noticed.
-                    </app-card-description>
-                </app-card-header>
-                <app-card-content>
-                    <a routerLink="/talent-profile">
-                        <app-button class="w-full bg-gradient-secondary text-white">
-                            Manage Talent Profile
-                        </app-button>
-                    </a>
-                </app-card-content>
-            </app-card>
-        </div>
-    </div>
-</section>
+<app-footer></app-footer>
 
 <app-footer></app-footer>
