@@ -151,6 +151,78 @@ export class ResumeService {
             isDefault: true,
             createdAt: new Date('2023-01-15'),
             updatedAt: new Date('2024-01-20')
+        },
+        {
+            id: '2',
+            userId: 'arunsurakylm@gmail.com',
+            title: 'Senior Engineer - Backend Development',
+            name: 'ARUN S',
+            email: 'arunsurakylm@gmail.com',
+            phone: '+91 7907620091',
+            linkedin: 'https://www.linkedin.com/in/arunsura/',
+            github: '',
+            website: '',
+            summary: 'Passionate Software Engineer with 5 years of experience in backend development, specializing in Node.js and Azure cloud. Skilled in designing scalable architectures, optimizing cloud-based applications, and implementing robust APIs. Adapt at delivering high-performance solutions that enhance efficiency and drive business growth.',
+            experience: [
+                {
+                    company: 'QBurst',
+                    position: 'Senior Engineer (Technical Lead)',
+                    startDate: '2022-07',
+                    endDate: '',
+                    current: true,
+                    description: `Leading software engineering projects focusing on scalable backend solutions
+• Leading a cross-functional team to deliver enterprise-grade solutions
+• Designing and developing scalable backend services in Node.js, capable of handling high-ingress, business-critical requests
+• Conducting load testing with JMeter and implementing optimizations that improved system performance by 40%
+• Developing data analytics and reporting solutions using Azure Databricks (Unity Catalog) and Apache Superset
+• Designing CMS data models and APIs in Strapi, integrating with Next.js for dynamic content management and CDN revalidation
+• Integrating solutions with Salesforce Marketing Cloud (Custom Activities) and Azure SSO for secure user authentication
+• Implementing unit and integration test cases to ensure code reliability and maintainability
+• Overseeing production support activities, including system performance monitoring and optimization
+• Collaborating directly with clients and cross-functional teams to understand business needs, streamline IT processes, and deliver efficient, reliable solutions`
+                },
+                {
+                    company: 'TATA Consultancy Services',
+                    position: 'Assistant System Engineer',
+                    startDate: '2020-11',
+                    endDate: '2022-07',
+                    current: false,
+                    description: `Global IT services and consulting company
+• Worked as a NodeJs Developer and handling 3 projects
+• Developed services to perform the CRUD operations
+• Deployed the developed applications to production
+• Optimized code to improve to quality and enhance maintainability
+• Worked along with client for understanding the business requirements
+• Worked on unit testing and Sonarqube fixes`
+                }
+            ],
+            education: [
+                {
+                    institution: 'College of Engineering, Chengannur',
+                    degree: 'Bachelor of Technology',
+                    field: 'Computer Science and Engineering',
+                    startDate: '2016-06',
+                    endDate: '2020-04',
+                    current: false
+                },
+                {
+                    institution: 'Govt. Boys HSS, Kayamkulam',
+                    degree: 'Senior Secondary Education',
+                    field: 'Computer Science',
+                    startDate: '2014-06',
+                    endDate: '2016-04',
+                    current: false
+                }
+            ],
+            projects: [],
+            skills: [
+                'Node.js', 'Azure Databricks', 'Azure Cloud', 'Load Testing', 'Unity Catalog', 'Strapi',
+                'Next.js', 'Azure CDN', 'Salesforce', 'SSO Integration', 'Testing', 'Unit Testing',
+                'Sonarqube', 'Python', 'JavaScript', 'TypeScript', 'HTML', 'CSS', 'Angular'
+            ],
+            isDefault: false,
+            createdAt: new Date('2024-11-27'),
+            updatedAt: new Date('2024-11-27')
         }
     ];
 

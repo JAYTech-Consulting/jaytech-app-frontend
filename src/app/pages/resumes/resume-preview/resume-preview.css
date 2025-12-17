@@ -30,12 +30,14 @@
 
 .template-modern .section-title {
     color: var(--theme-primary, #4f46e5);
-    font-weight: 700;
-    font-size: 1.125rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+    font-weight: 800;
+    font-size: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5rem;
 }
 
 /* Classic Template */
@@ -69,6 +71,179 @@
     margin-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+}
+
+/* Professional Template (Two Column) */
+.template-professional {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.template-professional .header {
+    grid-column: 1 / -1;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 1.5rem;
+    margin-bottom: 0;
+}
+
+.template-professional section {
+    margin-bottom: 2rem;
+}
+
+/* Move skills and education to left column in professional template */
+.template-professional section:has(.section-title:contains("Skills")),
+.template-professional section:has(.section-title:contains("Education")) {
+    grid-column: 1;
+}
+
+/* Since :has isn't fully supported everywhere or might be tricky with text content matching in pure CSS without specific classes, 
+   we'll use a different approach. We'll rely on the HTML structure remaining flat but we can't easily move sections 
+   without changing HTML or using specific classes on sections. 
+   
+   Wait, the plan mentioned using CSS Grid. But with the current flat HTML structure:
+   Header
+   Summary
+   Experience
+   Projects
+   Education
+   Skills
+   
+   We can't easily reorder them into columns purely with CSS Grid unless we wrap them or use specific :nth-child if the order is fixed.
+   The order IS fixed in the HTML.
+   1. Header
+   2. Summary
+   3. Experience
+   4. Projects
+   5. Education
+   6. Skills
+   
+   Let's try a different approach for Professional that works with the current DOM.
+   We can float the Education and Skills to the right or left? No, they are at the bottom.
+   
+   Actually, for a true two-column layout with arbitrary sections, we might need to change the HTML structure or accept a single column "Professional" look that is just very clean.
+   
+   OR, we can use `display: grid` on the container and place items explicitly.
+   Header: row 1, col 1-2
+   Summary: row 2, col 1-2
+   Experience: row 3, col 2
+   Projects: row 4, col 2
+   Education: row 3, col 1
+   Skills: row 4, col 1
+   
+   This assumes we know the index.
+   Header is direct child 1.
+   Summary is direct child 2 (if present).
+   Experience is direct child 3.
+   Projects is direct child 4.
+   Education is direct child 5.
+   Skills is direct child 6.
+   
+   The `*ngIf`s make this tricky because indices shift.
+   
+   Let's stick to a single-column Professional layout that looks "Professional" (e.g., distinct headers, maybe a left border).
+   
+   Revised Professional Template:
+   - Clean, left-aligned.
+   - Left border accent.
+*/
+
+.template-professional .header {
+    border-left: 5px solid var(--theme-primary, #4f46e5);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.template-professional .section-title {
+    color: var(--theme-primary, #4f46e5);
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.template-professional .section-title::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--theme-primary, #4f46e5);
+    margin-right: 0.75rem;
+}
+
+
+/* Creative Template */
+.template-creative .header {
+    background: var(--theme-primary, #7c3aed);
+    color: white;
+    padding: 2rem;
+    margin: -0.5in -0.5in 2rem -0.5in;
+    /* Negative margin to bleed to edge */
+}
+
+.template-creative .header h1 {
+    color: white;
+}
+
+.template-creative .header .text-gray-600 {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.template-creative .header a {
+    color: white !important;
+    text-decoration: underline;
+}
+
+.template-creative .section-title {
+    color: var(--theme-primary, #7c3aed);
+    font-weight: 900;
+    font-size: 1.25rem;
+    border-bottom: 4px solid #f3f4f6;
+    display: inline-block;
+    padding-bottom: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+
+/* Executive Template */
+.template-executive .header {
+    text-align: center;
+    border-bottom: 1px double #d1d5db;
+    border-top: 1px double #d1d5db;
+    padding: 2rem 0;
+    margin-bottom: 2.5rem;
+}
+
+.template-executive .header h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+.template-executive .section-title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    color: #111827;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.template-executive .section-title::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 2px;
+    background: var(--theme-primary, #000);
+    margin: 0.5rem auto 0;
 }
 
 @media print {

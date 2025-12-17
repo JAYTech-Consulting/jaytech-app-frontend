@@ -222,6 +222,9 @@ export class ResumeForm implements OnInit {
     }
 
     onSubmit() {
+        // Add any pending skills from the input
+        this.addSkills();
+
         if (!this.resumeForm.valid || !this.currentUser) return;
 
         this.isSubmitting = true;

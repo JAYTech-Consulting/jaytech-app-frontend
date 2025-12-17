@@ -2,11 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Footer } from '../../shared/components/footer/footer';
 import { Card } from '../../shared/components/card/card';
-import { CardHeader } from '../../shared/components/card-header/card-header';
-import { CardTitle } from '../../shared/components/card-title/card-title';
 import { CardContent } from '../../shared/components/card-content/card-content';
-import { CardDescription } from '../../shared/components/card-description/card-description';
-import { Button } from '../../shared/components/button/button';
+
 import { Auth } from '../../services/auth';
 import { JobPostService } from '../../services/job-post.service';
 import { UserService } from '../../services/user.service';
@@ -18,11 +15,7 @@ import { ResumeService } from '../../services/resume.service';
         Footer,
         RouterLink,
         Card,
-        CardHeader,
-        CardTitle,
-        CardContent,
-        CardDescription,
-        Button
+        CardContent
     ],
     templateUrl: './dashboard.html',
     styleUrl: './dashboard.css',
